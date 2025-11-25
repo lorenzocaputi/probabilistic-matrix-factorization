@@ -142,22 +142,29 @@ class ALSSolver:
         - records the loss trajectory.
     """
 
-    def __init__(self, problem: LowRankMF, init_scale=0.01):
+    def __init__(self, problem: LowRankMF, init_scale=0.01, V0=None):
         """
         Parameters
         ----------
         problem : LowRankMF
             The low-rank matrix factorization problem to solve.
         init_scale : float, optional
-            Scale for the random initialization of U, V.
+            Scale for the random initialization of V when V0 is not provided.
+        V0 : np.ndarray, optional
+            Custom initialization for V. If provided, must have shape (p, R).
         """
         self.problem = problem
-        self.U, self.V = self.problem.sample_initial_factors(scale=init_scale)
+        if V0 is not None:
+            self.V = V0
+        else:
+            self.V = self.problem.sample_initial_V(scale=init_scale)
+        self.U = None
         self.loss_history = []
 
-    def fit(self, max_iter=50, verbose=False):
+
+    def fit(self, max_iter=50, tol=None, verbose=False):
         """
-        Run ALS for a fixed number of iterations.
+        Run ALS for a fixed number of iterations, with optional early stopping.
 
         Updates:
             U = Y V (V^T V + lambda I_R)^{-1}
@@ -166,7 +173,10 @@ class ALSSolver:
         Parameters
         ----------
         max_iter : int
-            Number of ALS iterations.
+            Maximum number of ALS iterations.
+        tol : float or None, optional
+            Relative tolerance on the loss for early stopping.
+            If None, run exactly max_iter iterations.
         verbose : bool
             If True, print loss at each iteration.
         """
@@ -175,22 +185,28 @@ class ALSSolver:
         R = self.problem.R
 
         self.loss_history = []
+        prev_loss = None
 
         for t in range(max_iter):
-            # --- Update U given V ---
-            A_U = self.V.T @ self.V + lam * np.eye(R)   
-            B_U = Y @ self.V                            
-            self.U = np.linalg.solve(A_U, B_U.T).T      
+            A_U = self.V.T @ self.V + lam * np.eye(R)
+            B_U = Y @ self.V
+            self.U = np.linalg.solve(A_U, B_U.T).T
 
-            # --- Update V given U ---
-            A_V = self.U.T @ self.U + lam * np.eye(R)   
-            B_V = Y.T @ self.U                          
-            self.V = np.linalg.solve(A_V, B_V.T).T     
+            A_V = self.U.T @ self.U + lam * np.eye(R)
+            B_V = Y.T @ self.U
+            self.V = np.linalg.solve(A_V, B_V.T).T
 
-            # --- Compute and store loss ---
             current_loss = self.problem.loss(self.U, self.V)
             self.loss_history.append(current_loss)
 
             if verbose:
                 print(f"Iteration {t+1}/{max_iter}, loss = {current_loss:.6f}")
+
+            if tol is not None and prev_loss is not None:
+                rel_change = abs(prev_loss - current_loss) / max(prev_loss, 1e-12)
+                if rel_change < tol:
+                    break
+
+            prev_loss = current_loss
+
 

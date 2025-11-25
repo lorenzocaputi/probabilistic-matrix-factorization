@@ -15,9 +15,8 @@ problem = LowRankMF(
 
 
 solver = ALSSolver(problem, init_scale=0.01)
-solver.fit(max_iter=50, verbose=True)
+solver.fit(max_iter=200, tol=1e-6, verbose=True)
 
-losses = solver.loss_history
-
-Y_hat = problem.reconstruct(solver.U, solver.V)
+err = problem.relative_signal_error(solver.U, solver.V)
+print("Relative error on Y_true:", err)
 
