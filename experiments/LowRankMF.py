@@ -120,6 +120,17 @@ class LowRankMF:
         for given factors U, V.
         """
         return U @ V.T
+    
+    def relative_signal_error(self, U, V):
+        """
+        Relative Frobenius error with respect to Y_true:
+            ||Y_true - U V^T||_F / ||Y_true||_F
+        """
+        Y_hat = U @ V.T
+        num = np.linalg.norm(self.Y_true - Y_hat, ord="fro")
+        den = np.linalg.norm(self.Y_true, ord="fro")
+        return num / max(den, 1e-12)
+
 
 
 class ALSSolver:
