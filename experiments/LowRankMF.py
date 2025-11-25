@@ -89,14 +89,13 @@ class LowRankMF:
         else:
             self.Y = self.Y_true.copy()
 
-    def sample_initial_factors(self, scale=0.01):
+    def sample_initial_V(self, scale=0.01):
         """
-        Sample a random starting point (U0, V0) with small Gaussian entries.
-
+        Sample a random starting point V0 with small Gaussian entries.
         """
-        U0 = scale * np.random.randn(self.n, self.R)
         V0 = scale * np.random.randn(self.p, self.R)
-        return U0, V0
+        return V0
+
 
     def loss(self, U, V):
         """
