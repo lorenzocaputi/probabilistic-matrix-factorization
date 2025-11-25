@@ -129,6 +129,28 @@ class LowRankMF:
         num = np.linalg.norm(self.Y_true - Y_hat, ord="fro")
         den = np.linalg.norm(self.Y_true, ord="fro")
         return num / max(den, 1e-12)
+    
+    def grad(self, U, V):
+        """
+        Gradient of the regularized objective with respect to U and V.
+        """
+        Y_hat = U @ V.T
+        residual = Y_hat - self.Y
+
+        grad_U = residual @ V + self.lambda_reg * U
+        grad_V = residual.T @ U + self.lambda_reg * V
+
+        return grad_U, grad_V
+
+    def grad_norm(self, U, V):
+        """
+        Frobenius norm of the full gradient (U and V parts together).
+        """
+        grad_U, grad_V = self.grad(U, V)
+        norm_U = np.linalg.norm(grad_U, ord="fro")
+        norm_V = np.linalg.norm(grad_V, ord="fro")
+        return np.sqrt(norm_U**2 + norm_V**2)
+
 
 
 
