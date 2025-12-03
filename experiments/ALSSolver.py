@@ -1,5 +1,5 @@
 import numpy as np
-from experiments.LowRankMF import LowRankMF
+from LowRankMF import LowRankMF
 
 class ALSSolver:
     """

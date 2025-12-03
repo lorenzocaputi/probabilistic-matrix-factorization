@@ -1,4 +1,5 @@
-from LowRankMF import ALSSolver, LowRankMF
+from LowRankMF import LowRankMF
+from ALSSolver import ALSSolver
 import numpy as np
 
 
