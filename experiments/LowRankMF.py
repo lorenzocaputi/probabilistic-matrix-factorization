@@ -14,6 +14,7 @@ class LowRankMF:
     The optimization (ALS) is handled by a separate ALSSolver.
     """
 
+
     def __init__(self,
                  n,
                  p,
@@ -65,6 +66,7 @@ class LowRankMF:
 
         self._generate_data()
 
+
     def _generate_data(self):
         """
         Sample U_true, V_true with orthonormal columns and construct
@@ -88,6 +90,7 @@ class LowRankMF:
             self.Y = self.Y_true + noise
         else:
             self.Y = self.Y_true.copy()
+
 
     def sample_initial_V(self, scale=0.01):
         """
@@ -113,13 +116,6 @@ class LowRankMF:
 
         return data_term + reg_term
 
-
-    def reconstruct(self, U, V):
-        """
-        Return the reconstructed matrix Y_hat = U V^T
-        for given factors U, V.
-        """
-        return U @ V.T
     
     def relative_signal_error(self, U, V):
         """
@@ -131,6 +127,7 @@ class LowRankMF:
         den = np.linalg.norm(self.Y_true, ord="fro")
         return num / max(den, 1e-12)
     
+
     def grad(self, U, V):
         """
         Gradient of the regularized objective with respect to U and V.
@@ -151,6 +148,103 @@ class LowRankMF:
         norm_U = np.linalg.norm(grad_U, ord="fro")
         norm_V = np.linalg.norm(grad_V, ord="fro")
         return np.sqrt(norm_U**2 + norm_V**2)
+    
+
+    def get_svd(self, matrix="Y"):
+        """
+        Return (U_svd, s, Vt_svd) for the chosen matrix.
+
+        Parameters
+        ----------
+        matrix : {"Y", "Y_true"}
+            - "Y":      use the noisy observed matrix.
+            - "Y_true": use the clean signal matrix.
+
+        Returns
+        -------
+        U_svd : np.ndarray, shape (n, r)
+        s : np.ndarray, shape (r,)
+        Vt_svd : np.ndarray, shape (r, p)
+            Such that M ≈ U_svd @ np.diag(s) @ Vt_svd.
+        """
+        if matrix == "Y":
+            M = self.Y
+            attr = "_svd_Y"
+        elif matrix == "Y_true":
+            M = self.Y_true
+            attr = "_svd_Y_true"
+        else:
+            raise ValueError('matrix must be either "Y" or "Y_true".')
+
+        cached = getattr(self, attr, None)
+        if cached is None:
+            U_svd, s, Vt_svd = np.linalg.svd(M, full_matrices=False)
+            setattr(self, attr, (U_svd, s, Vt_svd))
+        else:
+            U_svd, s, Vt_svd = cached
+
+        return U_svd, s, Vt_svd
+    
+
+    def init_V_from_svd_directions(
+        self,
+        index_set,
+        matrix="Y",
+        scaling="random",
+        scale_range=(0.1, 10.0),
+    ):
+        """
+        Build an initialization V0 in a chosen singular subspace of the given matrix.
+
+        V0 has the form:
+            V0 = V_subset @ diag(scales),
+
+        where V_subset contains the right singular vectors corresponding to
+        the indices in index_set.
+
+        Parameters
+        ----------
+        index_set : array-like of ints
+            Indices of singular directions (0-based) to use. Must have length R.
+        matrix : {"Y", "Y_true"}, optional
+            Which matrix to take the SVD of (typically "Y").
+        scaling : {"random", "soft_threshold"}, optional
+            - "random":
+                scales[j] ~ Uniform(scale_range[0], scale_range[1]).
+            - "soft_threshold":
+                scales[j] = sqrt(max(s[i_j] - lambda_reg, 0)),
+                where s[i_j] is the singular value at index i_j.
+        scale_range : tuple of (float, float), optional
+            Range for random scaling when scaling == "random".
+
+        Returns
+        -------
+        V0 : np.ndarray, shape (p, R)
+            Initialization for V with columns in the span of the selected
+            singular right vectors.
+        """
+        U_svd, s, Vt_svd = self.get_svd(matrix=matrix)
+
+        index_set = np.asarray(index_set, dtype=int)
+        if index_set.shape[0] != self.R:
+            raise ValueError("index_set must have length equal to R.")
+        if index_set.min() < 0 or index_set.max() >= s.shape[0]:
+            raise ValueError("index_set contains invalid singular value indices.")
+
+        V_subset = Vt_svd[index_set, :].T  # shape (p, R)
+        s_subset = s[index_set]
+
+        if scaling == "random":
+            low, high = scale_range
+            scales = np.random.uniform(low, high, size=self.R)
+        elif scaling == "soft_threshold":
+            scales = np.sqrt(np.maximum(s_subset - self.lambda_reg, 0.0))
+        else:
+            raise ValueError('scaling must be "random" or "soft_threshold".')
+
+        V0 = V_subset @ np.diag(scales)
+        return V0
+
     
     def _global_minimizer_matrix(self, M):
         """
