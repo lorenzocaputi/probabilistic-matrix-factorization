@@ -1,0 +1,359 @@
+import numpy as np
+
+class LowRankMF:
+    """
+    Low-rank matrix factorization problem with synthetic data generation.
+
+    This class represents a *problem instance*:
+
+        - It generates a synthetic low-rank matrix Y_true of size (n x p),
+          with given true_rank and singular values.
+        - It adds Gaussian noise to obtain Y.
+        - It provides the objective (loss) for given U, V.
+
+    The optimization (ALS) is handled by a separate ALSSolver.
+    """
+
+
+    def __init__(self,
+                 n,
+                 p,
+                 true_rank,
+                 R,
+                 lambda_reg,
+                 singular_values=None,
+                 noise_level=0.0,
+                 seed=None):
+        """
+        Parameters
+        ----------
+        n : int
+            Number of rows of Y.
+        p : int
+            Number of columns of Y.
+        true_rank : int
+            Rank of the *true* underlying low-rank matrix Y_true.
+        R : int
+            Latent dimension used in the factorization model (rank of U, V).
+        lambda_reg : float
+            Regularization parameter lambda.
+        singular_values : array-like of length true_rank, optional
+            Singular values for Y_true. If None, use a simple decreasing sequence.
+        noise_level : float, optional
+            Standard deviation of Gaussian noise added to Y_true.
+        seed : int, optional
+            Random seed for reproducibility.
+        """
+        if seed is not None:
+            np.random.seed(seed)
+
+        self.n = int(n)
+        self.p = int(p)
+        self.true_rank = int(true_rank)
+        self.R = int(R)
+        self.lambda_reg = float(lambda_reg)
+        self.noise_level = float(noise_level)
+        self.seed = seed
+
+        if singular_values is None:
+            # default: [true_rank, ..., 2, 1]
+            self.singular_values = np.arange(self.true_rank, 0, -1, dtype=float)
+        else:
+            sv = np.asarray(singular_values, dtype=float)
+            if sv.shape[0] != self.true_rank:
+                raise ValueError("singular_values must have length true_rank.")
+            self.singular_values = sv
+
+        self._generate_data()
+
+
+    def _generate_data(self):
+        """
+        Sample U_true, V_true with orthonormal columns and construct
+
+            Y_true = U_true diag(singular_values) V_true^T,
+            Y = Y_true + noise_level * N(0,1)^{n x p}.
+        """
+        # U_true: (n x true_rank), orthonormal columns
+        U_rand = np.random.randn(self.n, self.true_rank)
+        self.U_true, _ = np.linalg.qr(U_rand)
+
+        # V_true: (p x true_rank), orthonormal columns
+        V_rand = np.random.randn(self.p, self.true_rank)
+        self.V_true, _ = np.linalg.qr(V_rand)
+
+        S = np.diag(self.singular_values)
+        self.Y_true = self.U_true @ S @ self.V_true.T
+
+        if self.noise_level > 0.0:
+            noise = self.noise_level * np.random.randn(self.n, self.p)
+            self.Y = self.Y_true + noise
+        else:
+            self.Y = self.Y_true.copy()
+
+
+    def sample_initial_V(self, scale=0.01):
+        """
+        Sample a random starting point V0 with small Gaussian entries.
+        """
+        V0 = scale * np.random.randn(self.p, self.R)
+        return V0
+
+
+    def loss(self, M, U, V):
+        """
+        Compute the regularized objective for a given matrix M:
+
+            0.5 * ||M - U V^T||_F^2 + 0.5 * lambda_reg * (||U||_F^2 + ||V||_F^2)
+        """
+        Y_hat = U @ V.T
+        residual = M - Y_hat
+
+        data_term = 0.5 * np.linalg.norm(residual, ord="fro")**2
+        reg_term = 0.5 * self.lambda_reg * (
+            np.linalg.norm(U, ord="fro")**2 + np.linalg.norm(V, ord="fro")**2
+        )
+
+        return data_term + reg_term
+
+    
+    def relative_signal_error(self, U, V):
+        """
+        Relative Frobenius error with respect to Y_true:
+            ||Y_true - U V^T||_F / ||Y_true||_F
+        """
+        Y_hat = U @ V.T
+        num = np.linalg.norm(self.Y_true - Y_hat, ord="fro")
+        den = np.linalg.norm(self.Y_true, ord="fro")
+        return num / max(den, 1e-12)
+    
+
+    def grad(self, U, V):
+        """
+        Gradient of the regularized objective with respect to U and V.
+        """
+        Y_hat = U @ V.T
+        residual = Y_hat - self.Y
+
+        grad_U = residual @ V + self.lambda_reg * U
+        grad_V = residual.T @ U + self.lambda_reg * V
+
+        return grad_U, grad_V
+
+    def grad_norm(self, U, V):
+        """
+        Frobenius norm of the full gradient (U and V parts together).
+        """
+        grad_U, grad_V = self.grad(U, V)
+        norm_U = np.linalg.norm(grad_U, ord="fro")
+        norm_V = np.linalg.norm(grad_V, ord="fro")
+        return np.sqrt(norm_U**2 + norm_V**2)
+    
+
+    def get_svd(self, matrix="Y"):
+        """
+        Return (U_svd, s, Vt_svd) for the chosen matrix.
+
+        Parameters
+        ----------
+        matrix : {"Y", "Y_true"}
+            - "Y":      use the noisy observed matrix.
+            - "Y_true": use the clean signal matrix.
+
+        Returns
+        -------
+        U_svd : np.ndarray, shape (n, r)
+        s : np.ndarray, shape (r,)
+        Vt_svd : np.ndarray, shape (r, p)
+            Such that M ≈ U_svd @ np.diag(s) @ Vt_svd.
+        """
+        if matrix == "Y":
+            M = self.Y
+            attr = "_svd_Y"
+        elif matrix == "Y_true":
+            M = self.Y_true
+            attr = "_svd_Y_true"
+        else:
+            raise ValueError('matrix must be either "Y" or "Y_true".')
+
+        cached = getattr(self, attr, None)
+        if cached is None:
+            U_svd, s, Vt_svd = np.linalg.svd(M, full_matrices=False)
+            setattr(self, attr, (U_svd, s, Vt_svd))
+        else:
+            U_svd, s, Vt_svd = cached
+
+        return U_svd, s, Vt_svd
+    
+
+    def init_V_from_svd_directions(
+        self,
+        index_set,
+        matrix="Y",
+        scaling="random",
+        scale_range=(0.1, 10.0),
+    ):
+        """
+        Build an initialization V0 in a chosen singular subspace of the given matrix.
+
+        V0 has the form:
+            V0 = V_subset @ diag(scales),
+
+        where V_subset contains the right singular vectors corresponding to
+        the indices in index_set.
+
+        Parameters
+        ----------
+        index_set : array-like of ints
+            Indices of singular directions (0-based) to use. Must have length R.
+        matrix : {"Y", "Y_true"}, optional
+            Which matrix to take the SVD of (typically "Y").
+        scaling : {"random", "soft_threshold"}, optional
+            - "random":
+                scales[j] ~ Uniform(scale_range[0], scale_range[1]).
+            - "soft_threshold":
+                scales[j] = sqrt(max(s[i_j] - lambda_reg, 0)),
+                where s[i_j] is the singular value at index i_j.
+        scale_range : tuple of (float, float), optional
+            Range for random scaling when scaling == "random".
+
+        Returns
+        -------
+        V0 : np.ndarray, shape (p, R)
+            Initialization for V with columns in the span of the selected
+            singular right vectors.
+        """
+        U_svd, s, Vt_svd = self.get_svd(matrix=matrix)
+
+        index_set = np.asarray(index_set, dtype=int)
+        if index_set.shape[0] != self.R:
+            raise ValueError("index_set must have length equal to R.")
+        if index_set.min() < 0 or index_set.max() >= s.shape[0]:
+            raise ValueError("index_set contains invalid singular value indices.")
+
+        V_subset = Vt_svd[index_set, :].T  # shape (p, R)
+        s_subset = s[index_set]
+
+        if scaling == "random":
+            low, high = scale_range
+            scales = np.random.uniform(low, high, size=self.R)
+        elif scaling == "soft_threshold":
+            scales = np.sqrt(np.maximum(s_subset - self.lambda_reg, 0.0))
+        else:
+            raise ValueError('scaling must be "random" or "soft_threshold".')
+
+        V0 = V_subset @ np.diag(scales)
+        return V0
+    
+
+    def init_V_orthogonal_to_global_minimizer(
+        self,
+        matrix="Y",
+        init_scale=0.1,
+        epsilon=0.0,
+        active_tol=1e-12,
+    ):
+        """
+        Build an initialization V0 whose columns are (approximately) orthogonal
+        to the right-singular subspace used by the global minimizer.
+
+        Parameters
+        ----------
+        matrix : {"Y", "Y_true"}
+            Which matrix defines the global minimizer subspace.
+        init_scale : float
+            Overall scale of the initialization (like ALSSolver(init_scale=...)).
+        epsilon : float
+            Optional leakage into the minimizer subspace:
+                V0 = V_perp + epsilon * V_star
+            Use epsilon=0.0 for exact orthogonal start.
+        active_tol : float
+            Columns of V_star with norm <= active_tol are treated as inactive
+            (e.g., when soft-thresholding zeroes them out).
+
+        Returns
+        -------
+        V0 : np.ndarray, shape (p, R)
+        """
+        # 1) Get a global minimizer (U_star, V_star) for the chosen matrix
+        if matrix == "Y":
+            _, V_star, _ = self.global_minimizer_Y()
+        elif matrix == "Y_true":
+            _, V_star, _ = self.global_minimizer_Ytrue()
+        else:
+            raise ValueError('matrix must be either "Y" or "Y_true".')
+
+        # 2) Identify active columns (avoid using zero-padded directions)
+        col_norms = np.linalg.norm(V_star, axis=0)
+        active = col_norms > active_tol
+
+        # 3) Sample a random V and project it to the orthogonal complement
+        V_rand = np.random.randn(self.p, self.R)
+
+        if np.any(active):
+            # Orthonormal basis for span(V_star_active)
+            Q, _ = np.linalg.qr(V_star[:, active])  # shape (p, k)
+            V_perp = V_rand - Q @ (Q.T @ V_rand)
+        else:
+            # If minimizer uses no active directions, "orthogonal complement" is all of R^p
+            V_perp = V_rand
+
+        # 4) Normalize columns (avoid tiny norms after projection)
+        norms = np.linalg.norm(V_perp, axis=0)
+        norms = np.maximum(norms, 1e-12)
+        V_perp = V_perp / norms
+
+        # 5) Scale to match your usual init magnitude
+        V0 = init_scale * V_perp
+
+        # 6) Optional leakage into the minimizer subspace
+        if epsilon != 0.0:
+            V0 = V0 + epsilon * V_star  # V_star is already shape (p, R), padded if needed
+
+        return V0
+
+    
+    def _global_minimizer_matrix(self, M):
+        """
+        Global minimizer of the regularized objective
+            0.5 * ||M - U V^T||_F^2 + 0.5 * lambda_reg * (||U||_F^2 + ||V||_F^2)
+        for a given matrix M, via soft-thresholded SVD.
+        """
+        U_svd, s, Vt_svd = np.linalg.svd(M, full_matrices=False)
+
+        k = min(self.R, s.shape[0])
+        U_R = U_svd[:, :k]
+        V_R = Vt_svd[:k, :].T
+        s_R = s[:k]
+
+        gamma = np.sqrt(np.maximum(s_R - self.lambda_reg, 0.0))
+
+        # Build factors U_star, V_star
+        U_star = U_R * gamma[np.newaxis, :]
+        V_star = V_R * gamma[np.newaxis, :]
+
+        if k < self.R:
+            n_pad = self.R - k
+            U_pad = np.zeros((self.n, n_pad))
+            V_pad = np.zeros((self.p, n_pad))
+            U_star = np.concatenate([U_star, U_pad], axis=1)
+            V_star = np.concatenate([V_star, V_pad], axis=1)
+
+        # Use the existing objective function (DRY)
+        global_loss = self.loss(M, U_star, V_star)
+        return U_star, V_star, global_loss
+    
+    def global_minimizer_Y(self):
+        """
+        Global minimizer of the regularized objective using the noisy matrix Y.
+        """
+        return self._global_minimizer_matrix(self.Y)
+
+    def global_minimizer_Ytrue(self):
+        """
+        Global minimizer of the regularized objective using the true matrix Y_true.
+        """
+        return self._global_minimizer_matrix(self.Y_true)
+
+
+
