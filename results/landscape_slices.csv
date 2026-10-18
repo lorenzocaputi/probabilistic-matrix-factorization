@@ -1,0 +1,1207 @@
+point,direction,eigenvalue,t,loss_change
+minimum,smallest eigenvalue,1,-2,4
+minimum,smallest eigenvalue,1,-1.98,3.88139
+minimum,smallest eigenvalue,1,-1.96,3.76554
+minimum,smallest eigenvalue,1,-1.94,3.65239
+minimum,smallest eigenvalue,1,-1.92,3.54189
+minimum,smallest eigenvalue,1,-1.9,3.43401
+minimum,smallest eigenvalue,1,-1.88,3.3287
+minimum,smallest eigenvalue,1,-1.86,3.2259
+minimum,smallest eigenvalue,1,-1.84,3.12559
+minimum,smallest eigenvalue,1,-1.82,3.0277
+minimum,smallest eigenvalue,1,-1.8,2.9322
+minimum,smallest eigenvalue,1,-1.78,2.83904
+minimum,smallest eigenvalue,1,-1.76,2.74819
+minimum,smallest eigenvalue,1,-1.74,2.6596
+minimum,smallest eigenvalue,1,-1.72,2.57322
+minimum,smallest eigenvalue,1,-1.7,2.48901
+minimum,smallest eigenvalue,1,-1.68,2.40694
+minimum,smallest eigenvalue,1,-1.66,2.32697
+minimum,smallest eigenvalue,1,-1.64,2.24904
+minimum,smallest eigenvalue,1,-1.62,2.17313
+minimum,smallest eigenvalue,1,-1.6,2.0992
+minimum,smallest eigenvalue,1,-1.58,2.0272
+minimum,smallest eigenvalue,1,-1.56,1.9571
+minimum,smallest eigenvalue,1,-1.54,1.88886
+minimum,smallest eigenvalue,1,-1.52,1.82244
+minimum,smallest eigenvalue,1,-1.5,1.75781
+minimum,smallest eigenvalue,1,-1.48,1.69493
+minimum,smallest eigenvalue,1,-1.46,1.63376
+minimum,smallest eigenvalue,1,-1.44,1.57428
+minimum,smallest eigenvalue,1,-1.42,1.51643
+minimum,smallest eigenvalue,1,-1.4,1.4602
+minimum,smallest eigenvalue,1,-1.38,1.40554
+minimum,smallest eigenvalue,1,-1.36,1.35243
+minimum,smallest eigenvalue,1,-1.34,1.30082
+minimum,smallest eigenvalue,1,-1.32,1.25069
+minimum,smallest eigenvalue,1,-1.3,1.20201
+minimum,smallest eigenvalue,1,-1.28,1.15474
+minimum,smallest eigenvalue,1,-1.26,1.10886
+minimum,smallest eigenvalue,1,-1.24,1.06433
+minimum,smallest eigenvalue,1,-1.22,1.02112
+minimum,smallest eigenvalue,1,-1.2,0.9792
+minimum,smallest eigenvalue,1,-1.18,0.938547
+minimum,smallest eigenvalue,1,-1.16,0.89913
+minimum,smallest eigenvalue,1,-1.14,0.86092
+minimum,smallest eigenvalue,1,-1.12,0.82389
+minimum,smallest eigenvalue,1,-1.1,0.788013
+minimum,smallest eigenvalue,1,-1.08,0.753261
+minimum,smallest eigenvalue,1,-1.06,0.71961
+minimum,smallest eigenvalue,1,-1.04,0.687032
+minimum,smallest eigenvalue,1,-1.02,0.655504
+minimum,smallest eigenvalue,1,-1,0.625
+minimum,smallest eigenvalue,1,-0.98,0.595496
+minimum,smallest eigenvalue,1,-0.96,0.566968
+minimum,smallest eigenvalue,1,-0.94,0.539394
+minimum,smallest eigenvalue,1,-0.92,0.512749
+minimum,smallest eigenvalue,1,-0.9,0.487013
+minimum,smallest eigenvalue,1,-0.88,0.462162
+minimum,smallest eigenvalue,1,-0.86,0.438176
+minimum,smallest eigenvalue,1,-0.84,0.415034
+minimum,smallest eigenvalue,1,-0.82,0.392715
+minimum,smallest eigenvalue,1,-0.8,0.3712
+minimum,smallest eigenvalue,1,-0.78,0.350469
+minimum,smallest eigenvalue,1,-0.76,0.330503
+minimum,smallest eigenvalue,1,-0.74,0.311283
+minimum,smallest eigenvalue,1,-0.72,0.292792
+minimum,smallest eigenvalue,1,-0.7,0.275013
+minimum,smallest eigenvalue,1,-0.68,0.257927
+minimum,smallest eigenvalue,1,-0.66,0.241518
+minimum,smallest eigenvalue,1,-0.64,0.225772
+minimum,smallest eigenvalue,1,-0.62,0.21067
+minimum,smallest eigenvalue,1,-0.6,0.1962
+minimum,smallest eigenvalue,1,-0.58,0.182346
+minimum,smallest eigenvalue,1,-0.56,0.169093
+minimum,smallest eigenvalue,1,-0.54,0.156429
+minimum,smallest eigenvalue,1,-0.52,0.14434
+minimum,smallest eigenvalue,1,-0.5,0.132812
+minimum,smallest eigenvalue,1,-0.48,0.121836
+minimum,smallest eigenvalue,1,-0.46,0.111397
+minimum,smallest eigenvalue,1,-0.44,0.101485
+minimum,smallest eigenvalue,1,-0.42,0.0920896
+minimum,smallest eigenvalue,1,-0.4,0.0832
+minimum,smallest eigenvalue,1,-0.38,0.0748064
+minimum,smallest eigenvalue,1,-0.36,0.0668995
+minimum,smallest eigenvalue,1,-0.34,0.0594704
+minimum,smallest eigenvalue,1,-0.32,0.0525107
+minimum,smallest eigenvalue,1,-0.3,0.0460125
+minimum,smallest eigenvalue,1,-0.28,0.0399683
+minimum,smallest eigenvalue,1,-0.26,0.0343712
+minimum,smallest eigenvalue,1,-0.24,0.0292147
+minimum,smallest eigenvalue,1,-0.22,0.0244928
+minimum,smallest eigenvalue,1,-0.2,0.0202
+minimum,smallest eigenvalue,1,-0.18,0.0163312
+minimum,smallest eigenvalue,1,-0.16,0.0128819
+minimum,smallest eigenvalue,1,-0.14,0.00984802
+minimum,smallest eigenvalue,1,-0.12,0.00722592
+minimum,smallest eigenvalue,1,-0.1,0.0050125
+minimum,smallest eigenvalue,1,-0.08,0.00320512
+minimum,smallest eigenvalue,1,-0.06,0.00180162
+minimum,smallest eigenvalue,1,-0.04,0.00080032
+minimum,smallest eigenvalue,1,-0.02,0.00020002
+minimum,smallest eigenvalue,1,0,0
+minimum,smallest eigenvalue,1,0.02,0.00020002
+minimum,smallest eigenvalue,1,0.04,0.00080032
+minimum,smallest eigenvalue,1,0.06,0.00180162
+minimum,smallest eigenvalue,1,0.08,0.00320512
+minimum,smallest eigenvalue,1,0.1,0.0050125
+minimum,smallest eigenvalue,1,0.12,0.00722592
+minimum,smallest eigenvalue,1,0.14,0.00984802
+minimum,smallest eigenvalue,1,0.16,0.0128819
+minimum,smallest eigenvalue,1,0.18,0.0163312
+minimum,smallest eigenvalue,1,0.2,0.0202
+minimum,smallest eigenvalue,1,0.22,0.0244928
+minimum,smallest eigenvalue,1,0.24,0.0292147
+minimum,smallest eigenvalue,1,0.26,0.0343712
+minimum,smallest eigenvalue,1,0.28,0.0399683
+minimum,smallest eigenvalue,1,0.3,0.0460125
+minimum,smallest eigenvalue,1,0.32,0.0525107
+minimum,smallest eigenvalue,1,0.34,0.0594704
+minimum,smallest eigenvalue,1,0.36,0.0668995
+minimum,smallest eigenvalue,1,0.38,0.0748064
+minimum,smallest eigenvalue,1,0.4,0.0832
+minimum,smallest eigenvalue,1,0.42,0.0920896
+minimum,smallest eigenvalue,1,0.44,0.101485
+minimum,smallest eigenvalue,1,0.46,0.111397
+minimum,smallest eigenvalue,1,0.48,0.121836
+minimum,smallest eigenvalue,1,0.5,0.132812
+minimum,smallest eigenvalue,1,0.52,0.14434
+minimum,smallest eigenvalue,1,0.54,0.156429
+minimum,smallest eigenvalue,1,0.56,0.169093
+minimum,smallest eigenvalue,1,0.58,0.182346
+minimum,smallest eigenvalue,1,0.6,0.1962
+minimum,smallest eigenvalue,1,0.62,0.21067
+minimum,smallest eigenvalue,1,0.64,0.225772
+minimum,smallest eigenvalue,1,0.66,0.241518
+minimum,smallest eigenvalue,1,0.68,0.257927
+minimum,smallest eigenvalue,1,0.7,0.275013
+minimum,smallest eigenvalue,1,0.72,0.292792
+minimum,smallest eigenvalue,1,0.74,0.311283
+minimum,smallest eigenvalue,1,0.76,0.330503
+minimum,smallest eigenvalue,1,0.78,0.350469
+minimum,smallest eigenvalue,1,0.8,0.3712
+minimum,smallest eigenvalue,1,0.82,0.392715
+minimum,smallest eigenvalue,1,0.84,0.415034
+minimum,smallest eigenvalue,1,0.86,0.438176
+minimum,smallest eigenvalue,1,0.88,0.462162
+minimum,smallest eigenvalue,1,0.9,0.487013
+minimum,smallest eigenvalue,1,0.92,0.512749
+minimum,smallest eigenvalue,1,0.94,0.539394
+minimum,smallest eigenvalue,1,0.96,0.566968
+minimum,smallest eigenvalue,1,0.98,0.595496
+minimum,smallest eigenvalue,1,1,0.625
+minimum,smallest eigenvalue,1,1.02,0.655504
+minimum,smallest eigenvalue,1,1.04,0.687032
+minimum,smallest eigenvalue,1,1.06,0.71961
+minimum,smallest eigenvalue,1,1.08,0.753261
+minimum,smallest eigenvalue,1,1.1,0.788013
+minimum,smallest eigenvalue,1,1.12,0.82389
+minimum,smallest eigenvalue,1,1.14,0.86092
+minimum,smallest eigenvalue,1,1.16,0.89913
+minimum,smallest eigenvalue,1,1.18,0.938547
+minimum,smallest eigenvalue,1,1.2,0.9792
+minimum,smallest eigenvalue,1,1.22,1.02112
+minimum,smallest eigenvalue,1,1.24,1.06433
+minimum,smallest eigenvalue,1,1.26,1.10886
+minimum,smallest eigenvalue,1,1.28,1.15474
+minimum,smallest eigenvalue,1,1.3,1.20201
+minimum,smallest eigenvalue,1,1.32,1.25069
+minimum,smallest eigenvalue,1,1.34,1.30082
+minimum,smallest eigenvalue,1,1.36,1.35243
+minimum,smallest eigenvalue,1,1.38,1.40554
+minimum,smallest eigenvalue,1,1.4,1.4602
+minimum,smallest eigenvalue,1,1.42,1.51643
+minimum,smallest eigenvalue,1,1.44,1.57428
+minimum,smallest eigenvalue,1,1.46,1.63376
+minimum,smallest eigenvalue,1,1.48,1.69493
+minimum,smallest eigenvalue,1,1.5,1.75781
+minimum,smallest eigenvalue,1,1.52,1.82244
+minimum,smallest eigenvalue,1,1.54,1.88886
+minimum,smallest eigenvalue,1,1.56,1.9571
+minimum,smallest eigenvalue,1,1.58,2.0272
+minimum,smallest eigenvalue,1,1.6,2.0992
+minimum,smallest eigenvalue,1,1.62,2.17313
+minimum,smallest eigenvalue,1,1.64,2.24904
+minimum,smallest eigenvalue,1,1.66,2.32697
+minimum,smallest eigenvalue,1,1.68,2.40694
+minimum,smallest eigenvalue,1,1.7,2.48901
+minimum,smallest eigenvalue,1,1.72,2.57322
+minimum,smallest eigenvalue,1,1.74,2.6596
+minimum,smallest eigenvalue,1,1.76,2.74819
+minimum,smallest eigenvalue,1,1.78,2.83904
+minimum,smallest eigenvalue,1,1.8,2.9322
+minimum,smallest eigenvalue,1,1.82,3.0277
+minimum,smallest eigenvalue,1,1.84,3.12559
+minimum,smallest eigenvalue,1,1.86,3.2259
+minimum,smallest eigenvalue,1,1.88,3.3287
+minimum,smallest eigenvalue,1,1.9,3.43401
+minimum,smallest eigenvalue,1,1.92,3.54189
+minimum,smallest eigenvalue,1,1.94,3.65239
+minimum,smallest eigenvalue,1,1.96,3.76554
+minimum,smallest eigenvalue,1,1.98,3.88139
+minimum,smallest eigenvalue,1,2,4
+minimum,largest eigenvalue,19,-2,39.0069
+minimum,largest eigenvalue,19,-1.98,38.2111
+minimum,largest eigenvalue,19,-1.96,37.424
+minimum,largest eigenvalue,19,-1.94,36.6456
+minimum,largest eigenvalue,19,-1.92,35.876
+minimum,largest eigenvalue,19,-1.9,35.1152
+minimum,largest eigenvalue,19,-1.88,34.363
+minimum,largest eigenvalue,19,-1.86,33.6194
+minimum,largest eigenvalue,19,-1.84,32.8846
+minimum,largest eigenvalue,19,-1.82,32.1583
+minimum,largest eigenvalue,19,-1.8,31.4407
+minimum,largest eigenvalue,19,-1.78,30.7316
+minimum,largest eigenvalue,19,-1.76,30.0311
+minimum,largest eigenvalue,19,-1.74,29.3391
+minimum,largest eigenvalue,19,-1.72,28.6556
+minimum,largest eigenvalue,19,-1.7,27.9806
+minimum,largest eigenvalue,19,-1.68,27.3141
+minimum,largest eigenvalue,19,-1.66,26.6561
+minimum,largest eigenvalue,19,-1.64,26.0065
+minimum,largest eigenvalue,19,-1.62,25.3653
+minimum,largest eigenvalue,19,-1.6,24.7324
+minimum,largest eigenvalue,19,-1.58,24.108
+minimum,largest eigenvalue,19,-1.56,23.4919
+minimum,largest eigenvalue,19,-1.54,22.8842
+minimum,largest eigenvalue,19,-1.52,22.2847
+minimum,largest eigenvalue,19,-1.5,21.6936
+minimum,largest eigenvalue,19,-1.48,21.1107
+minimum,largest eigenvalue,19,-1.46,20.5362
+minimum,largest eigenvalue,19,-1.44,19.9698
+minimum,largest eigenvalue,19,-1.42,19.4117
+minimum,largest eigenvalue,19,-1.4,18.8618
+minimum,largest eigenvalue,19,-1.38,18.32
+minimum,largest eigenvalue,19,-1.36,17.7865
+minimum,largest eigenvalue,19,-1.34,17.2611
+minimum,largest eigenvalue,19,-1.32,16.7439
+minimum,largest eigenvalue,19,-1.3,16.2347
+minimum,largest eigenvalue,19,-1.28,15.7337
+minimum,largest eigenvalue,19,-1.26,15.2408
+minimum,largest eigenvalue,19,-1.24,14.756
+minimum,largest eigenvalue,19,-1.22,14.2792
+minimum,largest eigenvalue,19,-1.2,13.8105
+minimum,largest eigenvalue,19,-1.18,13.3498
+minimum,largest eigenvalue,19,-1.16,12.8972
+minimum,largest eigenvalue,19,-1.14,12.4525
+minimum,largest eigenvalue,19,-1.12,12.0158
+minimum,largest eigenvalue,19,-1.1,11.5871
+minimum,largest eigenvalue,19,-1.08,11.1664
+minimum,largest eigenvalue,19,-1.06,10.7537
+minimum,largest eigenvalue,19,-1.04,10.3488
+minimum,largest eigenvalue,19,-1.02,9.95192
+minimum,largest eigenvalue,19,-1,9.56293
+minimum,largest eigenvalue,19,-0.98,9.18185
+minimum,largest eigenvalue,19,-0.96,8.80865
+minimum,largest eigenvalue,19,-0.94,8.44334
+minimum,largest eigenvalue,19,-0.92,8.08589
+minimum,largest eigenvalue,19,-0.9,7.73629
+minimum,largest eigenvalue,19,-0.88,7.39454
+minimum,largest eigenvalue,19,-0.86,7.06063
+minimum,largest eigenvalue,19,-0.84,6.73453
+minimum,largest eigenvalue,19,-0.82,6.41625
+minimum,largest eigenvalue,19,-0.8,6.10578
+minimum,largest eigenvalue,19,-0.78,5.8031
+minimum,largest eigenvalue,19,-0.76,5.5082
+minimum,largest eigenvalue,19,-0.74,5.22107
+minimum,largest eigenvalue,19,-0.72,4.94171
+minimum,largest eigenvalue,19,-0.7,4.67011
+minimum,largest eigenvalue,19,-0.68,4.40626
+minimum,largest eigenvalue,19,-0.66,4.15014
+minimum,largest eigenvalue,19,-0.64,3.90176
+minimum,largest eigenvalue,19,-0.62,3.6611
+minimum,largest eigenvalue,19,-0.6,3.42816
+minimum,largest eigenvalue,19,-0.58,3.20292
+minimum,largest eigenvalue,19,-0.56,2.98539
+minimum,largest eigenvalue,19,-0.54,2.77555
+minimum,largest eigenvalue,19,-0.52,2.5734
+minimum,largest eigenvalue,19,-0.5,2.37893
+minimum,largest eigenvalue,19,-0.48,2.19214
+minimum,largest eigenvalue,19,-0.46,2.01302
+minimum,largest eigenvalue,19,-0.44,1.84156
+minimum,largest eigenvalue,19,-0.42,1.67776
+minimum,largest eigenvalue,19,-0.4,1.52161
+minimum,largest eigenvalue,19,-0.38,1.37311
+minimum,largest eigenvalue,19,-0.36,1.23226
+minimum,largest eigenvalue,19,-0.34,1.09904
+minimum,largest eigenvalue,19,-0.32,0.97346
+minimum,largest eigenvalue,19,-0.3,0.85551
+minimum,largest eigenvalue,19,-0.28,0.745187
+minimum,largest eigenvalue,19,-0.26,0.642488
+minimum,largest eigenvalue,19,-0.24,0.547409
+minimum,largest eigenvalue,19,-0.22,0.459947
+minimum,largest eigenvalue,19,-0.2,0.380101
+minimum,largest eigenvalue,19,-0.18,0.307866
+minimum,largest eigenvalue,19,-0.16,0.243241
+minimum,largest eigenvalue,19,-0.14,0.186224
+minimum,largest eigenvalue,19,-0.12,0.136813
+minimum,largest eigenvalue,19,-0.1,0.0950063
+minimum,largest eigenvalue,19,-0.08,0.0608026
+minimum,largest eigenvalue,19,-0.06,0.0342008
+minimum,largest eigenvalue,19,-0.04,0.0152002
+minimum,largest eigenvalue,19,-0.02,0.00380001
+minimum,largest eigenvalue,19,0,0
+minimum,largest eigenvalue,19,0.02,0.00380001
+minimum,largest eigenvalue,19,0.04,0.0152002
+minimum,largest eigenvalue,19,0.06,0.0342008
+minimum,largest eigenvalue,19,0.08,0.0608026
+minimum,largest eigenvalue,19,0.1,0.0950063
+minimum,largest eigenvalue,19,0.12,0.136813
+minimum,largest eigenvalue,19,0.14,0.186224
+minimum,largest eigenvalue,19,0.16,0.243241
+minimum,largest eigenvalue,19,0.18,0.307866
+minimum,largest eigenvalue,19,0.2,0.380101
+minimum,largest eigenvalue,19,0.22,0.459947
+minimum,largest eigenvalue,19,0.24,0.547409
+minimum,largest eigenvalue,19,0.26,0.642488
+minimum,largest eigenvalue,19,0.28,0.745187
+minimum,largest eigenvalue,19,0.3,0.85551
+minimum,largest eigenvalue,19,0.32,0.97346
+minimum,largest eigenvalue,19,0.34,1.09904
+minimum,largest eigenvalue,19,0.36,1.23226
+minimum,largest eigenvalue,19,0.38,1.37311
+minimum,largest eigenvalue,19,0.4,1.52161
+minimum,largest eigenvalue,19,0.42,1.67776
+minimum,largest eigenvalue,19,0.44,1.84156
+minimum,largest eigenvalue,19,0.46,2.01302
+minimum,largest eigenvalue,19,0.48,2.19214
+minimum,largest eigenvalue,19,0.5,2.37893
+minimum,largest eigenvalue,19,0.52,2.5734
+minimum,largest eigenvalue,19,0.54,2.77555
+minimum,largest eigenvalue,19,0.56,2.98539
+minimum,largest eigenvalue,19,0.58,3.20292
+minimum,largest eigenvalue,19,0.6,3.42816
+minimum,largest eigenvalue,19,0.62,3.6611
+minimum,largest eigenvalue,19,0.64,3.90176
+minimum,largest eigenvalue,19,0.66,4.15014
+minimum,largest eigenvalue,19,0.68,4.40626
+minimum,largest eigenvalue,19,0.7,4.67011
+minimum,largest eigenvalue,19,0.72,4.94171
+minimum,largest eigenvalue,19,0.74,5.22107
+minimum,largest eigenvalue,19,0.76,5.5082
+minimum,largest eigenvalue,19,0.78,5.8031
+minimum,largest eigenvalue,19,0.8,6.10578
+minimum,largest eigenvalue,19,0.82,6.41625
+minimum,largest eigenvalue,19,0.84,6.73453
+minimum,largest eigenvalue,19,0.86,7.06063
+minimum,largest eigenvalue,19,0.88,7.39454
+minimum,largest eigenvalue,19,0.9,7.73629
+minimum,largest eigenvalue,19,0.92,8.08589
+minimum,largest eigenvalue,19,0.94,8.44334
+minimum,largest eigenvalue,19,0.96,8.80865
+minimum,largest eigenvalue,19,0.98,9.18185
+minimum,largest eigenvalue,19,1,9.56293
+minimum,largest eigenvalue,19,1.02,9.95192
+minimum,largest eigenvalue,19,1.04,10.3488
+minimum,largest eigenvalue,19,1.06,10.7537
+minimum,largest eigenvalue,19,1.08,11.1664
+minimum,largest eigenvalue,19,1.1,11.5871
+minimum,largest eigenvalue,19,1.12,12.0158
+minimum,largest eigenvalue,19,1.14,12.4525
+minimum,largest eigenvalue,19,1.16,12.8972
+minimum,largest eigenvalue,19,1.18,13.3498
+minimum,largest eigenvalue,19,1.2,13.8105
+minimum,largest eigenvalue,19,1.22,14.2792
+minimum,largest eigenvalue,19,1.24,14.756
+minimum,largest eigenvalue,19,1.26,15.2408
+minimum,largest eigenvalue,19,1.28,15.7337
+minimum,largest eigenvalue,19,1.3,16.2347
+minimum,largest eigenvalue,19,1.32,16.7439
+minimum,largest eigenvalue,19,1.34,17.2611
+minimum,largest eigenvalue,19,1.36,17.7865
+minimum,largest eigenvalue,19,1.38,18.32
+minimum,largest eigenvalue,19,1.4,18.8618
+minimum,largest eigenvalue,19,1.42,19.4117
+minimum,largest eigenvalue,19,1.44,19.9698
+minimum,largest eigenvalue,19,1.46,20.5362
+minimum,largest eigenvalue,19,1.48,21.1107
+minimum,largest eigenvalue,19,1.5,21.6936
+minimum,largest eigenvalue,19,1.52,22.2847
+minimum,largest eigenvalue,19,1.54,22.8842
+minimum,largest eigenvalue,19,1.56,23.4919
+minimum,largest eigenvalue,19,1.58,24.108
+minimum,largest eigenvalue,19,1.6,24.7324
+minimum,largest eigenvalue,19,1.62,25.3653
+minimum,largest eigenvalue,19,1.64,26.0065
+minimum,largest eigenvalue,19,1.66,26.6561
+minimum,largest eigenvalue,19,1.68,27.3141
+minimum,largest eigenvalue,19,1.7,27.9806
+minimum,largest eigenvalue,19,1.72,28.6556
+minimum,largest eigenvalue,19,1.74,29.3391
+minimum,largest eigenvalue,19,1.76,30.0311
+minimum,largest eigenvalue,19,1.78,30.7316
+minimum,largest eigenvalue,19,1.8,31.4407
+minimum,largest eigenvalue,19,1.82,32.1583
+minimum,largest eigenvalue,19,1.84,32.8846
+minimum,largest eigenvalue,19,1.86,33.6194
+minimum,largest eigenvalue,19,1.88,34.363
+minimum,largest eigenvalue,19,1.9,35.1152
+minimum,largest eigenvalue,19,1.92,35.876
+minimum,largest eigenvalue,19,1.94,36.6456
+minimum,largest eigenvalue,19,1.96,37.424
+minimum,largest eigenvalue,19,1.98,38.2111
+minimum,largest eigenvalue,19,2,39.0069
+minimum,random,,-2,16.2372
+minimum,random,,-1.98,15.9066
+minimum,random,,-1.96,15.5798
+minimum,random,,-1.94,15.2565
+minimum,random,,-1.92,14.9369
+minimum,random,,-1.9,14.6209
+minimum,random,,-1.88,14.3085
+minimum,random,,-1.86,13.9997
+minimum,random,,-1.84,13.6944
+minimum,random,,-1.82,13.3928
+minimum,random,,-1.8,13.0947
+minimum,random,,-1.78,12.8002
+minimum,random,,-1.76,12.5092
+minimum,random,,-1.74,12.2217
+minimum,random,,-1.72,11.9378
+minimum,random,,-1.7,11.6574
+minimum,random,,-1.68,11.3805
+minimum,random,,-1.66,11.1071
+minimum,random,,-1.64,10.8372
+minimum,random,,-1.62,10.5707
+minimum,random,,-1.6,10.3078
+minimum,random,,-1.58,10.0483
+minimum,random,,-1.56,9.79222
+minimum,random,,-1.54,9.53963
+minimum,random,,-1.52,9.29047
+minimum,random,,-1.5,9.04475
+minimum,random,,-1.48,8.80246
+minimum,random,,-1.46,8.56358
+minimum,random,,-1.44,8.32811
+minimum,random,,-1.42,8.09604
+minimum,random,,-1.4,7.86737
+minimum,random,,-1.38,7.64209
+minimum,random,,-1.36,7.42018
+minimum,random,,-1.34,7.20165
+minimum,random,,-1.32,6.98649
+minimum,random,,-1.3,6.77469
+minimum,random,,-1.28,6.56624
+minimum,random,,-1.26,6.36114
+minimum,random,,-1.24,6.15938
+minimum,random,,-1.22,5.96096
+minimum,random,,-1.2,5.76586
+minimum,random,,-1.18,5.57409
+minimum,random,,-1.16,5.38563
+minimum,random,,-1.14,5.20049
+minimum,random,,-1.12,5.01866
+minimum,random,,-1.1,4.84012
+minimum,random,,-1.08,4.66488
+minimum,random,,-1.06,4.49293
+minimum,random,,-1.04,4.32427
+minimum,random,,-1.02,4.15889
+minimum,random,,-1,3.99678
+minimum,random,,-0.98,3.83795
+minimum,random,,-0.96,3.68238
+minimum,random,,-0.94,3.53007
+minimum,random,,-0.92,3.38103
+minimum,random,,-0.9,3.23523
+minimum,random,,-0.88,3.09269
+minimum,random,,-0.86,2.95339
+minimum,random,,-0.84,2.81734
+minimum,random,,-0.82,2.68452
+minimum,random,,-0.8,2.55494
+minimum,random,,-0.78,2.4286
+minimum,random,,-0.76,2.30548
+minimum,random,,-0.74,2.18558
+minimum,random,,-0.72,2.06891
+minimum,random,,-0.7,1.95546
+minimum,random,,-0.68,1.84523
+minimum,random,,-0.66,1.73821
+minimum,random,,-0.64,1.6344
+minimum,random,,-0.62,1.5338
+minimum,random,,-0.6,1.43641
+minimum,random,,-0.58,1.34222
+minimum,random,,-0.56,1.25124
+minimum,random,,-0.54,1.16346
+minimum,random,,-0.52,1.07887
+minimum,random,,-0.5,0.997491
+minimum,random,,-0.48,0.919303
+minimum,random,,-0.46,0.844309
+minimum,random,,-0.44,0.77251
+minimum,random,,-0.42,0.703904
+minimum,random,,-0.4,0.638489
+minimum,random,,-0.38,0.576264
+minimum,random,,-0.36,0.51723
+minimum,random,,-0.34,0.461385
+minimum,random,,-0.32,0.408729
+minimum,random,,-0.3,0.359262
+minimum,random,,-0.28,0.312982
+minimum,random,,-0.26,0.269891
+minimum,random,,-0.24,0.229988
+minimum,random,,-0.22,0.193274
+minimum,random,,-0.2,0.159748
+minimum,random,,-0.18,0.12941
+minimum,random,,-0.16,0.102263
+minimum,random,,-0.14,0.0783047
+minimum,random,,-0.12,0.0575377
+minimum,random,,-0.1,0.0399624
+minimum,random,,-0.08,0.0255797
+minimum,random,,-0.06,0.0143908
+minimum,random,,-0.04,0.00639692
+minimum,random,,-0.02,0.0015995
+minimum,random,,0,0
+minimum,random,,0.02,0.00160006
+minimum,random,,0.04,0.00640143
+minimum,random,,0.06,0.014406
+minimum,random,,0.08,0.0256158
+minimum,random,,0.1,0.0400328
+minimum,random,,0.12,0.0576595
+minimum,random,,0.14,0.0784981
+minimum,random,,0.16,0.102551
+minimum,random,,0.18,0.129821
+minimum,random,,0.2,0.160311
+minimum,random,,0.22,0.194024
+minimum,random,,0.24,0.230963
+minimum,random,,0.26,0.27113
+minimum,random,,0.28,0.314529
+minimum,random,,0.3,0.361164
+minimum,random,,0.32,0.411038
+minimum,random,,0.34,0.464155
+minimum,random,,0.36,0.520518
+minimum,random,,0.38,0.580131
+minimum,random,,0.4,0.642999
+minimum,random,,0.42,0.709124
+minimum,random,,0.44,0.778513
+minimum,random,,0.46,0.851169
+minimum,random,,0.48,0.927096
+minimum,random,,0.5,1.0063
+minimum,random,,0.52,1.08878
+minimum,random,,0.54,1.17455
+minimum,random,,0.56,1.26361
+minimum,random,,0.58,1.35597
+minimum,random,,0.6,1.45163
+minimum,random,,0.62,1.55059
+minimum,random,,0.64,1.65287
+minimum,random,,0.66,1.75847
+minimum,random,,0.68,1.86738
+minimum,random,,0.7,1.97963
+minimum,random,,0.72,2.09521
+minimum,random,,0.74,2.21414
+minimum,random,,0.76,2.33641
+minimum,random,,0.78,2.46204
+minimum,random,,0.8,2.59102
+minimum,random,,0.82,2.72338
+minimum,random,,0.84,2.85911
+minimum,random,,0.86,2.99821
+minimum,random,,0.88,3.14071
+minimum,random,,0.9,3.2866
+minimum,random,,0.92,3.4359
+minimum,random,,0.94,3.5886
+minimum,random,,0.96,3.74472
+minimum,random,,0.98,3.90427
+minimum,random,,1,4.06725
+minimum,random,,1.02,4.23367
+minimum,random,,1.04,4.40354
+minimum,random,,1.06,4.57686
+minimum,random,,1.08,4.75365
+minimum,random,,1.1,4.93391
+minimum,random,,1.12,5.11766
+minimum,random,,1.14,5.30489
+minimum,random,,1.16,5.49563
+minimum,random,,1.18,5.68987
+minimum,random,,1.2,5.88763
+minimum,random,,1.22,6.08892
+minimum,random,,1.24,6.29374
+minimum,random,,1.26,6.5021
+minimum,random,,1.28,6.71402
+minimum,random,,1.3,6.92951
+minimum,random,,1.32,7.14857
+minimum,random,,1.34,7.37121
+minimum,random,,1.36,7.59745
+minimum,random,,1.38,7.82728
+minimum,random,,1.4,8.06074
+minimum,random,,1.42,8.29782
+minimum,random,,1.44,8.53853
+minimum,random,,1.46,8.78289
+minimum,random,,1.48,9.0309
+minimum,random,,1.5,9.28259
+minimum,random,,1.52,9.53795
+minimum,random,,1.54,9.797
+minimum,random,,1.56,10.0597
+minimum,random,,1.58,10.3262
+minimum,random,,1.6,10.5964
+minimum,random,,1.62,10.8703
+minimum,random,,1.64,11.148
+minimum,random,,1.66,11.4294
+minimum,random,,1.68,11.7146
+minimum,random,,1.7,12.0036
+minimum,random,,1.72,12.2964
+minimum,random,,1.74,12.593
+minimum,random,,1.76,12.8934
+minimum,random,,1.78,13.1976
+minimum,random,,1.8,13.5057
+minimum,random,,1.82,13.8176
+minimum,random,,1.84,14.1334
+minimum,random,,1.86,14.4531
+minimum,random,,1.88,14.7767
+minimum,random,,1.9,15.1042
+minimum,random,,1.92,15.4357
+minimum,random,,1.94,15.771
+minimum,random,,1.96,16.1104
+minimum,random,,1.98,16.4536
+minimum,random,,2,16.8009
+saddle,negative eigenvalue,-1,-2,0
+saddle,negative eigenvalue,-1,-1.98,-0.039008
+saddle,negative eigenvalue,-1,-1.96,-0.0760637
+saddle,negative eigenvalue,-1,-1.94,-0.111214
+saddle,negative eigenvalue,-1,-1.92,-0.144507
+saddle,negative eigenvalue,-1,-1.9,-0.175987
+saddle,negative eigenvalue,-1,-1.88,-0.205702
+saddle,negative eigenvalue,-1,-1.86,-0.233696
+saddle,negative eigenvalue,-1,-1.84,-0.260014
+saddle,negative eigenvalue,-1,-1.82,-0.284701
+saddle,negative eigenvalue,-1,-1.8,-0.3078
+saddle,negative eigenvalue,-1,-1.78,-0.329355
+saddle,negative eigenvalue,-1,-1.76,-0.349409
+saddle,negative eigenvalue,-1,-1.74,-0.368005
+saddle,negative eigenvalue,-1,-1.72,-0.385184
+saddle,negative eigenvalue,-1,-1.7,-0.400988
+saddle,negative eigenvalue,-1,-1.68,-0.415457
+saddle,negative eigenvalue,-1,-1.66,-0.428634
+saddle,negative eigenvalue,-1,-1.64,-0.440556
+saddle,negative eigenvalue,-1,-1.62,-0.451266
+saddle,negative eigenvalue,-1,-1.6,-0.4608
+saddle,negative eigenvalue,-1,-1.58,-0.469198
+saddle,negative eigenvalue,-1,-1.56,-0.476499
+saddle,negative eigenvalue,-1,-1.54,-0.482739
+saddle,negative eigenvalue,-1,-1.52,-0.487956
+saddle,negative eigenvalue,-1,-1.5,-0.492187
+saddle,negative eigenvalue,-1,-1.48,-0.495468
+saddle,negative eigenvalue,-1,-1.46,-0.497835
+saddle,negative eigenvalue,-1,-1.44,-0.499323
+saddle,negative eigenvalue,-1,-1.42,-0.499966
+saddle,negative eigenvalue,-1,-1.4,-0.4998
+saddle,negative eigenvalue,-1,-1.38,-0.498858
+saddle,negative eigenvalue,-1,-1.36,-0.497172
+saddle,negative eigenvalue,-1,-1.34,-0.494778
+saddle,negative eigenvalue,-1,-1.32,-0.491705
+saddle,negative eigenvalue,-1,-1.3,-0.487987
+saddle,negative eigenvalue,-1,-1.28,-0.483656
+saddle,negative eigenvalue,-1,-1.26,-0.478741
+saddle,negative eigenvalue,-1,-1.24,-0.473273
+saddle,negative eigenvalue,-1,-1.22,-0.467283
+saddle,negative eigenvalue,-1,-1.2,-0.4608
+saddle,negative eigenvalue,-1,-1.18,-0.453853
+saddle,negative eigenvalue,-1,-1.16,-0.44647
+saddle,negative eigenvalue,-1,-1.14,-0.43868
+saddle,negative eigenvalue,-1,-1.12,-0.43051
+saddle,negative eigenvalue,-1,-1.1,-0.421987
+saddle,negative eigenvalue,-1,-1.08,-0.413139
+saddle,negative eigenvalue,-1,-1.06,-0.40399
+saddle,negative eigenvalue,-1,-1.04,-0.394568
+saddle,negative eigenvalue,-1,-1.02,-0.384896
+saddle,negative eigenvalue,-1,-1,-0.375
+saddle,negative eigenvalue,-1,-0.98,-0.364904
+saddle,negative eigenvalue,-1,-0.96,-0.354632
+saddle,negative eigenvalue,-1,-0.94,-0.344206
+saddle,negative eigenvalue,-1,-0.92,-0.333651
+saddle,negative eigenvalue,-1,-0.9,-0.322988
+saddle,negative eigenvalue,-1,-0.88,-0.312238
+saddle,negative eigenvalue,-1,-0.86,-0.301424
+saddle,negative eigenvalue,-1,-0.84,-0.290566
+saddle,negative eigenvalue,-1,-0.82,-0.279685
+saddle,negative eigenvalue,-1,-0.8,-0.2688
+saddle,negative eigenvalue,-1,-0.78,-0.257931
+saddle,negative eigenvalue,-1,-0.76,-0.247097
+saddle,negative eigenvalue,-1,-0.74,-0.236317
+saddle,negative eigenvalue,-1,-0.72,-0.225608
+saddle,negative eigenvalue,-1,-0.7,-0.214987
+saddle,negative eigenvalue,-1,-0.68,-0.204473
+saddle,negative eigenvalue,-1,-0.66,-0.194082
+saddle,negative eigenvalue,-1,-0.64,-0.183828
+saddle,negative eigenvalue,-1,-0.62,-0.17373
+saddle,negative eigenvalue,-1,-0.6,-0.1638
+saddle,negative eigenvalue,-1,-0.58,-0.154054
+saddle,negative eigenvalue,-1,-0.56,-0.144507
+saddle,negative eigenvalue,-1,-0.54,-0.135171
+saddle,negative eigenvalue,-1,-0.52,-0.12606
+saddle,negative eigenvalue,-1,-0.5,-0.117188
+saddle,negative eigenvalue,-1,-0.48,-0.108564
+saddle,negative eigenvalue,-1,-0.46,-0.100203
+saddle,negative eigenvalue,-1,-0.44,-0.0921149
+saddle,negative eigenvalue,-1,-0.42,-0.0843104
+saddle,negative eigenvalue,-1,-0.4,-0.0768
+saddle,negative eigenvalue,-1,-0.38,-0.0695936
+saddle,negative eigenvalue,-1,-0.36,-0.0627005
+saddle,negative eigenvalue,-1,-0.34,-0.0561296
+saddle,negative eigenvalue,-1,-0.32,-0.0498893
+saddle,negative eigenvalue,-1,-0.3,-0.0439875
+saddle,negative eigenvalue,-1,-0.28,-0.0384317
+saddle,negative eigenvalue,-1,-0.26,-0.0332288
+saddle,negative eigenvalue,-1,-0.24,-0.0283853
+saddle,negative eigenvalue,-1,-0.22,-0.0239072
+saddle,negative eigenvalue,-1,-0.2,-0.0198
+saddle,negative eigenvalue,-1,-0.18,-0.0160688
+saddle,negative eigenvalue,-1,-0.16,-0.0127181
+saddle,negative eigenvalue,-1,-0.14,-0.00975198
+saddle,negative eigenvalue,-1,-0.12,-0.00717408
+saddle,negative eigenvalue,-1,-0.1,-0.0049875
+saddle,negative eigenvalue,-1,-0.08,-0.00319488
+saddle,negative eigenvalue,-1,-0.06,-0.00179838
+saddle,negative eigenvalue,-1,-0.04,-0.00079968
+saddle,negative eigenvalue,-1,-0.02,-0.00019998
+saddle,negative eigenvalue,-1,0,0
+saddle,negative eigenvalue,-1,0.02,-0.00019998
+saddle,negative eigenvalue,-1,0.04,-0.00079968
+saddle,negative eigenvalue,-1,0.06,-0.00179838
+saddle,negative eigenvalue,-1,0.08,-0.00319488
+saddle,negative eigenvalue,-1,0.1,-0.0049875
+saddle,negative eigenvalue,-1,0.12,-0.00717408
+saddle,negative eigenvalue,-1,0.14,-0.00975198
+saddle,negative eigenvalue,-1,0.16,-0.0127181
+saddle,negative eigenvalue,-1,0.18,-0.0160688
+saddle,negative eigenvalue,-1,0.2,-0.0198
+saddle,negative eigenvalue,-1,0.22,-0.0239072
+saddle,negative eigenvalue,-1,0.24,-0.0283853
+saddle,negative eigenvalue,-1,0.26,-0.0332288
+saddle,negative eigenvalue,-1,0.28,-0.0384317
+saddle,negative eigenvalue,-1,0.3,-0.0439875
+saddle,negative eigenvalue,-1,0.32,-0.0498893
+saddle,negative eigenvalue,-1,0.34,-0.0561296
+saddle,negative eigenvalue,-1,0.36,-0.0627005
+saddle,negative eigenvalue,-1,0.38,-0.0695936
+saddle,negative eigenvalue,-1,0.4,-0.0768
+saddle,negative eigenvalue,-1,0.42,-0.0843104
+saddle,negative eigenvalue,-1,0.44,-0.0921149
+saddle,negative eigenvalue,-1,0.46,-0.100203
+saddle,negative eigenvalue,-1,0.48,-0.108564
+saddle,negative eigenvalue,-1,0.5,-0.117188
+saddle,negative eigenvalue,-1,0.52,-0.12606
+saddle,negative eigenvalue,-1,0.54,-0.135171
+saddle,negative eigenvalue,-1,0.56,-0.144507
+saddle,negative eigenvalue,-1,0.58,-0.154054
+saddle,negative eigenvalue,-1,0.6,-0.1638
+saddle,negative eigenvalue,-1,0.62,-0.17373
+saddle,negative eigenvalue,-1,0.64,-0.183828
+saddle,negative eigenvalue,-1,0.66,-0.194082
+saddle,negative eigenvalue,-1,0.68,-0.204473
+saddle,negative eigenvalue,-1,0.7,-0.214988
+saddle,negative eigenvalue,-1,0.72,-0.225608
+saddle,negative eigenvalue,-1,0.74,-0.236317
+saddle,negative eigenvalue,-1,0.76,-0.247097
+saddle,negative eigenvalue,-1,0.78,-0.257931
+saddle,negative eigenvalue,-1,0.8,-0.2688
+saddle,negative eigenvalue,-1,0.82,-0.279685
+saddle,negative eigenvalue,-1,0.84,-0.290566
+saddle,negative eigenvalue,-1,0.86,-0.301424
+saddle,negative eigenvalue,-1,0.88,-0.312238
+saddle,negative eigenvalue,-1,0.9,-0.322987
+saddle,negative eigenvalue,-1,0.92,-0.333651
+saddle,negative eigenvalue,-1,0.94,-0.344206
+saddle,negative eigenvalue,-1,0.96,-0.354632
+saddle,negative eigenvalue,-1,0.98,-0.364904
+saddle,negative eigenvalue,-1,1,-0.375
+saddle,negative eigenvalue,-1,1.02,-0.384896
+saddle,negative eigenvalue,-1,1.04,-0.394568
+saddle,negative eigenvalue,-1,1.06,-0.40399
+saddle,negative eigenvalue,-1,1.08,-0.413139
+saddle,negative eigenvalue,-1,1.1,-0.421987
+saddle,negative eigenvalue,-1,1.12,-0.43051
+saddle,negative eigenvalue,-1,1.14,-0.43868
+saddle,negative eigenvalue,-1,1.16,-0.44647
+saddle,negative eigenvalue,-1,1.18,-0.453853
+saddle,negative eigenvalue,-1,1.2,-0.4608
+saddle,negative eigenvalue,-1,1.22,-0.467283
+saddle,negative eigenvalue,-1,1.24,-0.473273
+saddle,negative eigenvalue,-1,1.26,-0.478741
+saddle,negative eigenvalue,-1,1.28,-0.483656
+saddle,negative eigenvalue,-1,1.3,-0.487987
+saddle,negative eigenvalue,-1,1.32,-0.491705
+saddle,negative eigenvalue,-1,1.34,-0.494778
+saddle,negative eigenvalue,-1,1.36,-0.497172
+saddle,negative eigenvalue,-1,1.38,-0.498858
+saddle,negative eigenvalue,-1,1.4,-0.4998
+saddle,negative eigenvalue,-1,1.42,-0.499966
+saddle,negative eigenvalue,-1,1.44,-0.499323
+saddle,negative eigenvalue,-1,1.46,-0.497835
+saddle,negative eigenvalue,-1,1.48,-0.495468
+saddle,negative eigenvalue,-1,1.5,-0.492188
+saddle,negative eigenvalue,-1,1.52,-0.487956
+saddle,negative eigenvalue,-1,1.54,-0.482739
+saddle,negative eigenvalue,-1,1.56,-0.476499
+saddle,negative eigenvalue,-1,1.58,-0.469198
+saddle,negative eigenvalue,-1,1.6,-0.4608
+saddle,negative eigenvalue,-1,1.62,-0.451266
+saddle,negative eigenvalue,-1,1.64,-0.440556
+saddle,negative eigenvalue,-1,1.66,-0.428634
+saddle,negative eigenvalue,-1,1.68,-0.415457
+saddle,negative eigenvalue,-1,1.7,-0.400988
+saddle,negative eigenvalue,-1,1.72,-0.385184
+saddle,negative eigenvalue,-1,1.74,-0.368005
+saddle,negative eigenvalue,-1,1.76,-0.349409
+saddle,negative eigenvalue,-1,1.78,-0.329355
+saddle,negative eigenvalue,-1,1.8,-0.3078
+saddle,negative eigenvalue,-1,1.82,-0.284701
+saddle,negative eigenvalue,-1,1.84,-0.260014
+saddle,negative eigenvalue,-1,1.86,-0.233696
+saddle,negative eigenvalue,-1,1.88,-0.205702
+saddle,negative eigenvalue,-1,1.9,-0.175987
+saddle,negative eigenvalue,-1,1.92,-0.144507
+saddle,negative eigenvalue,-1,1.94,-0.111214
+saddle,negative eigenvalue,-1,1.96,-0.0760637
+saddle,negative eigenvalue,-1,1.98,-0.039008
+saddle,negative eigenvalue,-1,2,0
+saddle,largest eigenvalue,19,-2,39.0069
+saddle,largest eigenvalue,19,-1.98,38.2111
+saddle,largest eigenvalue,19,-1.96,37.424
+saddle,largest eigenvalue,19,-1.94,36.6456
+saddle,largest eigenvalue,19,-1.92,35.876
+saddle,largest eigenvalue,19,-1.9,35.1152
+saddle,largest eigenvalue,19,-1.88,34.363
+saddle,largest eigenvalue,19,-1.86,33.6194
+saddle,largest eigenvalue,19,-1.84,32.8846
+saddle,largest eigenvalue,19,-1.82,32.1583
+saddle,largest eigenvalue,19,-1.8,31.4407
+saddle,largest eigenvalue,19,-1.78,30.7316
+saddle,largest eigenvalue,19,-1.76,30.0311
+saddle,largest eigenvalue,19,-1.74,29.3391
+saddle,largest eigenvalue,19,-1.72,28.6556
+saddle,largest eigenvalue,19,-1.7,27.9806
+saddle,largest eigenvalue,19,-1.68,27.3141
+saddle,largest eigenvalue,19,-1.66,26.6561
+saddle,largest eigenvalue,19,-1.64,26.0065
+saddle,largest eigenvalue,19,-1.62,25.3653
+saddle,largest eigenvalue,19,-1.6,24.7324
+saddle,largest eigenvalue,19,-1.58,24.108
+saddle,largest eigenvalue,19,-1.56,23.4919
+saddle,largest eigenvalue,19,-1.54,22.8842
+saddle,largest eigenvalue,19,-1.52,22.2847
+saddle,largest eigenvalue,19,-1.5,21.6936
+saddle,largest eigenvalue,19,-1.48,21.1107
+saddle,largest eigenvalue,19,-1.46,20.5362
+saddle,largest eigenvalue,19,-1.44,19.9698
+saddle,largest eigenvalue,19,-1.42,19.4117
+saddle,largest eigenvalue,19,-1.4,18.8618
+saddle,largest eigenvalue,19,-1.38,18.32
+saddle,largest eigenvalue,19,-1.36,17.7865
+saddle,largest eigenvalue,19,-1.34,17.2611
+saddle,largest eigenvalue,19,-1.32,16.7439
+saddle,largest eigenvalue,19,-1.3,16.2347
+saddle,largest eigenvalue,19,-1.28,15.7337
+saddle,largest eigenvalue,19,-1.26,15.2408
+saddle,largest eigenvalue,19,-1.24,14.756
+saddle,largest eigenvalue,19,-1.22,14.2792
+saddle,largest eigenvalue,19,-1.2,13.8105
+saddle,largest eigenvalue,19,-1.18,13.3498
+saddle,largest eigenvalue,19,-1.16,12.8972
+saddle,largest eigenvalue,19,-1.14,12.4525
+saddle,largest eigenvalue,19,-1.12,12.0158
+saddle,largest eigenvalue,19,-1.1,11.5871
+saddle,largest eigenvalue,19,-1.08,11.1664
+saddle,largest eigenvalue,19,-1.06,10.7537
+saddle,largest eigenvalue,19,-1.04,10.3488
+saddle,largest eigenvalue,19,-1.02,9.95192
+saddle,largest eigenvalue,19,-1,9.56293
+saddle,largest eigenvalue,19,-0.98,9.18185
+saddle,largest eigenvalue,19,-0.96,8.80865
+saddle,largest eigenvalue,19,-0.94,8.44334
+saddle,largest eigenvalue,19,-0.92,8.08589
+saddle,largest eigenvalue,19,-0.9,7.73629
+saddle,largest eigenvalue,19,-0.88,7.39454
+saddle,largest eigenvalue,19,-0.86,7.06063
+saddle,largest eigenvalue,19,-0.84,6.73453
+saddle,largest eigenvalue,19,-0.82,6.41625
+saddle,largest eigenvalue,19,-0.8,6.10578
+saddle,largest eigenvalue,19,-0.78,5.8031
+saddle,largest eigenvalue,19,-0.76,5.5082
+saddle,largest eigenvalue,19,-0.74,5.22107
+saddle,largest eigenvalue,19,-0.72,4.94171
+saddle,largest eigenvalue,19,-0.7,4.67011
+saddle,largest eigenvalue,19,-0.68,4.40626
+saddle,largest eigenvalue,19,-0.66,4.15014
+saddle,largest eigenvalue,19,-0.64,3.90176
+saddle,largest eigenvalue,19,-0.62,3.6611
+saddle,largest eigenvalue,19,-0.6,3.42816
+saddle,largest eigenvalue,19,-0.58,3.20292
+saddle,largest eigenvalue,19,-0.56,2.98539
+saddle,largest eigenvalue,19,-0.54,2.77555
+saddle,largest eigenvalue,19,-0.52,2.5734
+saddle,largest eigenvalue,19,-0.5,2.37893
+saddle,largest eigenvalue,19,-0.48,2.19214
+saddle,largest eigenvalue,19,-0.46,2.01302
+saddle,largest eigenvalue,19,-0.44,1.84156
+saddle,largest eigenvalue,19,-0.42,1.67776
+saddle,largest eigenvalue,19,-0.4,1.52161
+saddle,largest eigenvalue,19,-0.38,1.37311
+saddle,largest eigenvalue,19,-0.36,1.23226
+saddle,largest eigenvalue,19,-0.34,1.09904
+saddle,largest eigenvalue,19,-0.32,0.97346
+saddle,largest eigenvalue,19,-0.3,0.85551
+saddle,largest eigenvalue,19,-0.28,0.745187
+saddle,largest eigenvalue,19,-0.26,0.642488
+saddle,largest eigenvalue,19,-0.24,0.547409
+saddle,largest eigenvalue,19,-0.22,0.459947
+saddle,largest eigenvalue,19,-0.2,0.380101
+saddle,largest eigenvalue,19,-0.18,0.307866
+saddle,largest eigenvalue,19,-0.16,0.243241
+saddle,largest eigenvalue,19,-0.14,0.186224
+saddle,largest eigenvalue,19,-0.12,0.136813
+saddle,largest eigenvalue,19,-0.1,0.0950063
+saddle,largest eigenvalue,19,-0.08,0.0608026
+saddle,largest eigenvalue,19,-0.06,0.0342008
+saddle,largest eigenvalue,19,-0.04,0.0152002
+saddle,largest eigenvalue,19,-0.02,0.00380001
+saddle,largest eigenvalue,19,0,0
+saddle,largest eigenvalue,19,0.02,0.00380001
+saddle,largest eigenvalue,19,0.04,0.0152002
+saddle,largest eigenvalue,19,0.06,0.0342008
+saddle,largest eigenvalue,19,0.08,0.0608026
+saddle,largest eigenvalue,19,0.1,0.0950063
+saddle,largest eigenvalue,19,0.12,0.136813
+saddle,largest eigenvalue,19,0.14,0.186224
+saddle,largest eigenvalue,19,0.16,0.243241
+saddle,largest eigenvalue,19,0.18,0.307866
+saddle,largest eigenvalue,19,0.2,0.380101
+saddle,largest eigenvalue,19,0.22,0.459947
+saddle,largest eigenvalue,19,0.24,0.547409
+saddle,largest eigenvalue,19,0.26,0.642488
+saddle,largest eigenvalue,19,0.28,0.745187
+saddle,largest eigenvalue,19,0.3,0.85551
+saddle,largest eigenvalue,19,0.32,0.97346
+saddle,largest eigenvalue,19,0.34,1.09904
+saddle,largest eigenvalue,19,0.36,1.23226
+saddle,largest eigenvalue,19,0.38,1.37311
+saddle,largest eigenvalue,19,0.4,1.52161
+saddle,largest eigenvalue,19,0.42,1.67776
+saddle,largest eigenvalue,19,0.44,1.84156
+saddle,largest eigenvalue,19,0.46,2.01302
+saddle,largest eigenvalue,19,0.48,2.19214
+saddle,largest eigenvalue,19,0.5,2.37893
+saddle,largest eigenvalue,19,0.52,2.5734
+saddle,largest eigenvalue,19,0.54,2.77555
+saddle,largest eigenvalue,19,0.56,2.98539
+saddle,largest eigenvalue,19,0.58,3.20292
+saddle,largest eigenvalue,19,0.6,3.42816
+saddle,largest eigenvalue,19,0.62,3.6611
+saddle,largest eigenvalue,19,0.64,3.90176
+saddle,largest eigenvalue,19,0.66,4.15014
+saddle,largest eigenvalue,19,0.68,4.40626
+saddle,largest eigenvalue,19,0.7,4.67011
+saddle,largest eigenvalue,19,0.72,4.94171
+saddle,largest eigenvalue,19,0.74,5.22107
+saddle,largest eigenvalue,19,0.76,5.5082
+saddle,largest eigenvalue,19,0.78,5.8031
+saddle,largest eigenvalue,19,0.8,6.10578
+saddle,largest eigenvalue,19,0.82,6.41625
+saddle,largest eigenvalue,19,0.84,6.73453
+saddle,largest eigenvalue,19,0.86,7.06063
+saddle,largest eigenvalue,19,0.88,7.39454
+saddle,largest eigenvalue,19,0.9,7.73629
+saddle,largest eigenvalue,19,0.92,8.08589
+saddle,largest eigenvalue,19,0.94,8.44334
+saddle,largest eigenvalue,19,0.96,8.80865
+saddle,largest eigenvalue,19,0.98,9.18185
+saddle,largest eigenvalue,19,1,9.56293
+saddle,largest eigenvalue,19,1.02,9.95192
+saddle,largest eigenvalue,19,1.04,10.3488
+saddle,largest eigenvalue,19,1.06,10.7537
+saddle,largest eigenvalue,19,1.08,11.1664
+saddle,largest eigenvalue,19,1.1,11.5871
+saddle,largest eigenvalue,19,1.12,12.0158
+saddle,largest eigenvalue,19,1.14,12.4525
+saddle,largest eigenvalue,19,1.16,12.8972
+saddle,largest eigenvalue,19,1.18,13.3498
+saddle,largest eigenvalue,19,1.2,13.8105
+saddle,largest eigenvalue,19,1.22,14.2792
+saddle,largest eigenvalue,19,1.24,14.756
+saddle,largest eigenvalue,19,1.26,15.2408
+saddle,largest eigenvalue,19,1.28,15.7337
+saddle,largest eigenvalue,19,1.3,16.2347
+saddle,largest eigenvalue,19,1.32,16.7439
+saddle,largest eigenvalue,19,1.34,17.2611
+saddle,largest eigenvalue,19,1.36,17.7865
+saddle,largest eigenvalue,19,1.38,18.32
+saddle,largest eigenvalue,19,1.4,18.8618
+saddle,largest eigenvalue,19,1.42,19.4117
+saddle,largest eigenvalue,19,1.44,19.9698
+saddle,largest eigenvalue,19,1.46,20.5362
+saddle,largest eigenvalue,19,1.48,21.1107
+saddle,largest eigenvalue,19,1.5,21.6936
+saddle,largest eigenvalue,19,1.52,22.2847
+saddle,largest eigenvalue,19,1.54,22.8842
+saddle,largest eigenvalue,19,1.56,23.4919
+saddle,largest eigenvalue,19,1.58,24.108
+saddle,largest eigenvalue,19,1.6,24.7324
+saddle,largest eigenvalue,19,1.62,25.3653
+saddle,largest eigenvalue,19,1.64,26.0065
+saddle,largest eigenvalue,19,1.66,26.6561
+saddle,largest eigenvalue,19,1.68,27.3141
+saddle,largest eigenvalue,19,1.7,27.9806
+saddle,largest eigenvalue,19,1.72,28.6556
+saddle,largest eigenvalue,19,1.74,29.3391
+saddle,largest eigenvalue,19,1.76,30.0311
+saddle,largest eigenvalue,19,1.78,30.7316
+saddle,largest eigenvalue,19,1.8,31.4407
+saddle,largest eigenvalue,19,1.82,32.1583
+saddle,largest eigenvalue,19,1.84,32.8846
+saddle,largest eigenvalue,19,1.86,33.6194
+saddle,largest eigenvalue,19,1.88,34.363
+saddle,largest eigenvalue,19,1.9,35.1152
+saddle,largest eigenvalue,19,1.92,35.876
+saddle,largest eigenvalue,19,1.94,36.6456
+saddle,largest eigenvalue,19,1.96,37.424
+saddle,largest eigenvalue,19,1.98,38.2111
+saddle,largest eigenvalue,19,2,39.0069
+saddle,random,,-2,15.9775
+saddle,random,,-1.98,15.6482
+saddle,random,,-1.96,15.3227
+saddle,random,,-1.94,15.0009
+saddle,random,,-1.92,14.6828
+saddle,random,,-1.9,14.3685
+saddle,random,,-1.88,14.0578
+saddle,random,,-1.86,13.7509
+saddle,random,,-1.84,13.4476
+saddle,random,,-1.82,13.148
+saddle,random,,-1.8,12.852
+saddle,random,,-1.78,12.5596
+saddle,random,,-1.76,12.2709
+saddle,random,,-1.74,11.9858
+saddle,random,,-1.72,11.7043
+saddle,random,,-1.7,11.4264
+saddle,random,,-1.68,11.1521
+saddle,random,,-1.66,10.8814
+saddle,random,,-1.64,10.6142
+saddle,random,,-1.62,10.3505
+saddle,random,,-1.6,10.0904
+saddle,random,,-1.58,9.83379
+saddle,random,,-1.56,9.58071
+saddle,random,,-1.54,9.33114
+saddle,random,,-1.52,9.08505
+saddle,random,,-1.5,8.84245
+saddle,random,,-1.48,8.60333
+saddle,random,,-1.46,8.36766
+saddle,random,,-1.44,8.13545
+saddle,random,,-1.42,7.90668
+saddle,random,,-1.4,7.68135
+saddle,random,,-1.38,7.45944
+saddle,random,,-1.36,7.24094
+saddle,random,,-1.34,7.02585
+saddle,random,,-1.32,6.81415
+saddle,random,,-1.3,6.60584
+saddle,random,,-1.28,6.40091
+saddle,random,,-1.26,6.19935
+saddle,random,,-1.24,6.00115
+saddle,random,,-1.22,5.8063
+saddle,random,,-1.2,5.61479
+saddle,random,,-1.18,5.42662
+saddle,random,,-1.16,5.24178
+saddle,random,,-1.14,5.06026
+saddle,random,,-1.12,4.88204
+saddle,random,,-1.1,4.70713
+saddle,random,,-1.08,4.53552
+saddle,random,,-1.06,4.36719
+saddle,random,,-1.04,4.20215
+saddle,random,,-1.02,4.04038
+saddle,random,,-1,3.88188
+saddle,random,,-0.98,3.72663
+saddle,random,,-0.96,3.57464
+saddle,random,,-0.94,3.42589
+saddle,random,,-0.92,3.28038
+saddle,random,,-0.9,3.13811
+saddle,random,,-0.88,2.99906
+saddle,random,,-0.86,2.86323
+saddle,random,,-0.84,2.73062
+saddle,random,,-0.82,2.60121
+saddle,random,,-0.8,2.47501
+saddle,random,,-0.78,2.352
+saddle,random,,-0.76,2.23218
+saddle,random,,-0.74,2.11554
+saddle,random,,-0.72,2.00209
+saddle,random,,-0.7,1.89181
+saddle,random,,-0.68,1.7847
+saddle,random,,-0.66,1.68075
+saddle,random,,-0.64,1.57996
+saddle,random,,-0.62,1.48233
+saddle,random,,-0.6,1.38784
+saddle,random,,-0.58,1.2965
+saddle,random,,-0.56,1.20831
+saddle,random,,-0.54,1.12325
+saddle,random,,-0.52,1.04132
+saddle,random,,-0.5,0.962516
+saddle,random,,-0.48,0.886839
+saddle,random,,-0.46,0.814284
+saddle,random,,-0.44,0.744845
+saddle,random,,-0.42,0.67852
+saddle,random,,-0.4,0.615305
+saddle,random,,-0.38,0.555196
+saddle,random,,-0.36,0.498192
+saddle,random,,-0.34,0.444288
+saddle,random,,-0.32,0.393482
+saddle,random,,-0.3,0.345771
+saddle,random,,-0.28,0.301152
+saddle,random,,-0.26,0.259623
+saddle,random,,-0.24,0.221182
+saddle,random,,-0.22,0.185825
+saddle,random,,-0.2,0.153552
+saddle,random,,-0.18,0.124359
+saddle,random,,-0.16,0.098246
+saddle,random,,-0.14,0.07521
+saddle,random,,-0.12,0.0552496
+saddle,random,,-0.1,0.0383634
+saddle,random,,-0.08,0.0245499
+saddle,random,,-0.06,0.013808
+saddle,random,,-0.04,0.00613629
+saddle,random,,-0.02,0.00153394
+saddle,random,,0,0
+saddle,random,,0.02,0.0015337
+saddle,random,,0.04,0.0061344
+saddle,random,,0.06,0.0138016
+saddle,random,,0.08,0.0245348
+saddle,random,,0.1,0.0383339
+saddle,random,,0.12,0.0551986
+saddle,random,,0.14,0.075129
+saddle,random,,0.16,0.0981251
+saddle,random,,0.18,0.124187
+saddle,random,,0.2,0.153316
+saddle,random,,0.22,0.185511
+saddle,random,,0.24,0.220774
+saddle,random,,0.26,0.259104
+saddle,random,,0.28,0.300504
+saddle,random,,0.3,0.344974
+saddle,random,,0.32,0.392515
+saddle,random,,0.34,0.443128
+saddle,random,,0.36,0.496815
+saddle,random,,0.38,0.553577
+saddle,random,,0.4,0.613416
+saddle,random,,0.42,0.676333
+saddle,random,,0.44,0.742331
+saddle,random,,0.46,0.811411
+saddle,random,,0.48,0.883576
+saddle,random,,0.5,0.958827
+saddle,random,,0.52,1.03717
+saddle,random,,0.54,1.1186
+saddle,random,,0.56,1.20312
+saddle,random,,0.58,1.29075
+saddle,random,,0.6,1.38147
+saddle,random,,0.62,1.47529
+saddle,random,,0.64,1.57223
+saddle,random,,0.66,1.67227
+saddle,random,,0.68,1.77542
+saddle,random,,0.7,1.88169
+saddle,random,,0.72,1.99107
+saddle,random,,0.74,2.10358
+saddle,random,,0.76,2.21922
+saddle,random,,0.78,2.33799
+saddle,random,,0.8,2.4599
+saddle,random,,0.82,2.58494
+saddle,random,,0.84,2.71313
+saddle,random,,0.86,2.84446
+saddle,random,,0.88,2.97895
+saddle,random,,0.9,3.1166
+saddle,random,,0.92,3.25741
+saddle,random,,0.94,3.40138
+saddle,random,,0.96,3.54853
+saddle,random,,0.98,3.69886
+saddle,random,,1,3.85237
+saddle,random,,1.02,4.00906
+saddle,random,,1.04,4.16896
+saddle,random,,1.06,4.33205
+saddle,random,,1.08,4.49835
+saddle,random,,1.1,4.66786
+saddle,random,,1.12,4.84058
+saddle,random,,1.14,5.01654
+saddle,random,,1.16,5.19572
+saddle,random,,1.18,5.37814
+saddle,random,,1.2,5.5638
+saddle,random,,1.22,5.75271
+saddle,random,,1.24,5.94489
+saddle,random,,1.26,6.14032
+saddle,random,,1.28,6.33903
+saddle,random,,1.3,6.54101
+saddle,random,,1.32,6.74628
+saddle,random,,1.34,6.95485
+saddle,random,,1.36,7.16671
+saddle,random,,1.38,7.38188
+saddle,random,,1.4,7.60037
+saddle,random,,1.42,7.82219
+saddle,random,,1.44,8.04734
+saddle,random,,1.46,8.27583
+saddle,random,,1.48,8.50766
+saddle,random,,1.5,8.74286
+saddle,random,,1.52,8.98142
+saddle,random,,1.54,9.22336
+saddle,random,,1.56,9.46868
+saddle,random,,1.58,9.71739
+saddle,random,,1.6,9.96951
+saddle,random,,1.62,10.225
+saddle,random,,1.64,10.484
+saddle,random,,1.66,10.7464
+saddle,random,,1.68,11.0122
+saddle,random,,1.7,11.2815
+saddle,random,,1.72,11.5542
+saddle,random,,1.74,11.8304
+saddle,random,,1.76,12.1101
+saddle,random,,1.78,12.3932
+saddle,random,,1.8,12.6799
+saddle,random,,1.82,12.9701
+saddle,random,,1.84,13.2638
+saddle,random,,1.86,13.561
+saddle,random,,1.88,13.8618
+saddle,random,,1.9,14.1661
+saddle,random,,1.92,14.474
+saddle,random,,1.94,14.7854
+saddle,random,,1.96,15.1005
+saddle,random,,1.98,15.4192
+saddle,random,,2,15.7414
