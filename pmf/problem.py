@@ -1,17 +1,31 @@
 import numpy as np
 
+from pmf.linalg import top_svd
+
+
 class LowRankMF:
     """
-    Low-rank matrix factorization problem with synthetic data generation.
+    Low-rank matrix factorization problem (MAP estimation in PMF).
 
     This class represents a *problem instance*:
 
-        - It generates a synthetic low-rank matrix Y_true of size (n x p),
-          with given true_rank and singular values.
-        - It adds Gaussian noise to obtain Y.
-        - It provides the objective (loss) for given U, V.
+        - It holds a data matrix Y of size (n x p), either generated here
+          (synthetic low-rank signal plus Gaussian noise) or supplied with
+          `LowRankMF.from_matrix`.
+        - It optionally holds an observation mask (True = observed) for
+          matrix completion.
+        - It provides the MAP objective, its gradient and Hessian, and the
+          closed-form global minimizer for complete data.
 
-    The optimization (ALS) is handled by a separate ALSSolver.
+    The objective is
+
+        L(U, V) = 0.5 * || mask * (Y - U V^T) ||_F^2
+                  + 0.5 * ( tr(U Lambda U^T) + tr(V Lambda V^T) ),
+
+    with Lambda = lambda_reg * I_R when lambda_reg is a scalar and
+    Lambda = diag(lambda_reg) when it is a vector of length R.
+
+    The optimization is handled by separate solver objects (pmf.solvers).
     """
 
 
@@ -23,7 +37,8 @@ class LowRankMF:
                  lambda_reg,
                  singular_values=None,
                  noise_level=0.0,
-                 seed=None):
+                 seed=None,
+                 missing_frac=0.0):
         """
         Parameters
         ----------
@@ -35,25 +50,29 @@ class LowRankMF:
             Rank of the *true* underlying low-rank matrix Y_true.
         R : int
             Latent dimension used in the factorization model (rank of U, V).
-        lambda_reg : float
-            Regularization parameter lambda.
+        lambda_reg : float or array-like of length R
+            Prior precision. A scalar gives the isotropic prior of part 1 of
+            the notes; a vector gives the diagonal prior Lambda of part 2.
         singular_values : array-like of length true_rank, optional
             Singular values for Y_true. If None, use a simple decreasing sequence.
         noise_level : float, optional
             Standard deviation of Gaussian noise added to Y_true.
         seed : int, optional
-            Random seed for reproducibility.
+            Random seed. All randomness of the instance (data, mask and the
+            initializations sampled from it) comes from one generator.
+        missing_frac : float, optional
+            Fraction of entries hidden uniformly at random (0 = complete data).
         """
-        if seed is not None:
-            np.random.seed(seed)
+        self.rng = np.random.default_rng(seed)
+        self.seed = seed
 
         self.n = int(n)
         self.p = int(p)
         self.true_rank = int(true_rank)
         self.R = int(R)
-        self.lambda_reg = float(lambda_reg)
+        self._set_lambda(lambda_reg)
         self.noise_level = float(noise_level)
-        self.seed = seed
+        self.missing_frac = float(missing_frac)
 
         if singular_values is None:
             # default: [true_rank, ..., 2, 1]
@@ -66,6 +85,75 @@ class LowRankMF:
 
         self._generate_data()
 
+        if self.missing_frac > 0.0:
+            self.mask = self.rng.random((self.n, self.p)) >= self.missing_frac
+        else:
+            self.mask = None
+
+
+    @classmethod
+    def from_matrix(cls, Y, R, lambda_reg, mask=None, Y_true=None, seed=None):
+        """
+        Build a problem from a given data matrix instead of synthetic data.
+
+        Parameters
+        ----------
+        Y : np.ndarray, shape (n, p)
+            Data matrix. Entries outside the mask are ignored by the objective.
+        R : int
+            Latent dimension.
+        lambda_reg : float or array-like of length R
+            Prior precision (see the class docstring).
+        mask : np.ndarray of bool, shape (n, p), optional
+            True where Y is observed. None means complete data.
+        Y_true : np.ndarray, optional
+            Clean signal, if known (used only for diagnostics).
+        seed : int, optional
+            Seed for the generator used by initializations.
+        """
+        problem = cls.__new__(cls)
+        problem.rng = np.random.default_rng(seed)
+        problem.seed = seed
+        Y = np.asarray(Y, dtype=float)
+        problem.n, problem.p = Y.shape
+        problem.R = int(R)
+        problem._set_lambda(lambda_reg)
+        problem.noise_level = float("nan")
+        problem.true_rank = None
+        problem.singular_values = None
+        problem.U_true = None
+        problem.V_true = None
+        problem.Y_true = None if Y_true is None else np.asarray(Y_true, dtype=float)
+
+        if mask is None:
+            problem.mask = None
+            problem.missing_frac = 0.0
+            problem.Y = Y.copy()
+        else:
+            mask = np.asarray(mask, dtype=bool)
+            if mask.shape != Y.shape:
+                raise ValueError("mask must have the same shape as Y.")
+            problem.mask = mask
+            problem.missing_frac = 1.0 - mask.mean()
+            # Missing entries are stored as 0 so that they never leak into
+            # computations that forget to apply the mask.
+            problem.Y = np.where(mask, Y, 0.0)
+        return problem
+
+
+    def _set_lambda(self, lambda_reg):
+        lam = np.asarray(lambda_reg, dtype=float)
+        if lam.ndim == 0:
+            self.lambda_reg = float(lam)
+            self.lam = np.full(self.R, float(lam))
+        else:
+            if lam.shape != (self.R,):
+                raise ValueError("lambda_reg must be a scalar or have length R.")
+            self.lambda_reg = lam.copy()
+            self.lam = lam.copy()
+        if np.any(self.lam < 0):
+            raise ValueError("lambda_reg must be nonnegative.")
+
 
     def _generate_data(self):
         """
@@ -75,68 +163,117 @@ class LowRankMF:
             Y = Y_true + noise_level * N(0,1)^{n x p}.
         """
         # U_true: (n x true_rank), orthonormal columns
-        U_rand = np.random.randn(self.n, self.true_rank)
+        U_rand = self.rng.standard_normal((self.n, self.true_rank))
         self.U_true, _ = np.linalg.qr(U_rand)
 
         # V_true: (p x true_rank), orthonormal columns
-        V_rand = np.random.randn(self.p, self.true_rank)
+        V_rand = self.rng.standard_normal((self.p, self.true_rank))
         self.V_true, _ = np.linalg.qr(V_rand)
 
         S = np.diag(self.singular_values)
         self.Y_true = self.U_true @ S @ self.V_true.T
 
         if self.noise_level > 0.0:
-            noise = self.noise_level * np.random.randn(self.n, self.p)
+            noise = self.noise_level * self.rng.standard_normal((self.n, self.p))
             self.Y = self.Y_true + noise
         else:
             self.Y = self.Y_true.copy()
+
+
+    @property
+    def complete(self):
+        """True when every entry of Y is observed."""
+        return self.mask is None
+
+
+    @property
+    def weights(self):
+        """Observation mask as floats (all ones for complete data)."""
+        if self.mask is None:
+            return np.ones((self.n, self.p))
+        return self.mask.astype(float)
 
 
     def sample_initial_V(self, scale=0.01):
         """
         Sample a random starting point V0 with small Gaussian entries.
         """
-        V0 = scale * np.random.randn(self.p, self.R)
+        V0 = scale * self.rng.standard_normal((self.p, self.R))
         return V0
 
 
-    def loss(self, M, U, V):
+    def sample_initial_UV(self, scale=0.01):
+        """
+        Sample a random starting point (U0, V0) with small Gaussian entries
+        (for solvers that update U and V jointly).
+        """
+        U0 = scale * self.rng.standard_normal((self.n, self.R))
+        V0 = scale * self.rng.standard_normal((self.p, self.R))
+        return U0, V0
+
+
+    def loss(self, M, U, V, mask=None):
         """
         Compute the regularized objective for a given matrix M:
 
-            0.5 * ||M - U V^T||_F^2 + 0.5 * lambda_reg * (||U||_F^2 + ||V||_F^2)
+            0.5 * ||mask * (M - U V^T)||_F^2
+            + 0.5 * (tr(U Lambda U^T) + tr(V Lambda V^T))
+
+        mask=None means every entry counts (use `objective` for the loss that
+        the solvers minimize, which applies the problem's own mask).
         """
         Y_hat = U @ V.T
         residual = M - Y_hat
+        if mask is not None:
+            residual = np.where(mask, residual, 0.0)
 
         data_term = 0.5 * np.linalg.norm(residual, ord="fro")**2
-        reg_term = 0.5 * self.lambda_reg * (
-            np.linalg.norm(U, ord="fro")**2 + np.linalg.norm(V, ord="fro")**2
+        reg_term = 0.5 * (
+            np.sum(self.lam * np.sum(U**2, axis=0))
+            + np.sum(self.lam * np.sum(V**2, axis=0))
         )
 
         return data_term + reg_term
 
-    
+
+    def objective(self, U, V):
+        """
+        The MAP objective on the observed entries of Y.
+        """
+        return self.loss(self.Y, U, V, mask=self.mask)
+
+
+    def relative_error(self, Z, reference="Y_true"):
+        """
+        Relative Frobenius error ||ref - Z||_F / ||ref||_F with ref = Y_true
+        (default) or Y.
+        """
+        ref = self.Y_true if reference == "Y_true" else self.Y
+        if ref is None:
+            return float("nan")
+        num = np.linalg.norm(ref - Z, ord="fro")
+        den = np.linalg.norm(ref, ord="fro")
+        return num / max(den, 1e-12)
+
+
     def relative_signal_error(self, U, V):
         """
         Relative Frobenius error with respect to Y_true:
             ||Y_true - U V^T||_F / ||Y_true||_F
         """
-        Y_hat = U @ V.T
-        num = np.linalg.norm(self.Y_true - Y_hat, ord="fro")
-        den = np.linalg.norm(self.Y_true, ord="fro")
-        return num / max(den, 1e-12)
-    
+        return self.relative_error(U @ V.T, reference="Y_true")
+
 
     def grad(self, U, V):
         """
         Gradient of the regularized objective with respect to U and V.
         """
-        Y_hat = U @ V.T
-        residual = Y_hat - self.Y
+        residual = U @ V.T - self.Y
+        if self.mask is not None:
+            residual = np.where(self.mask, residual, 0.0)
 
-        grad_U = residual @ V + self.lambda_reg * U
-        grad_V = residual.T @ U + self.lambda_reg * V
+        grad_U = residual @ V + U * self.lam
+        grad_V = residual.T @ U + V * self.lam
 
         return grad_U, grad_V
 
@@ -148,7 +285,44 @@ class LowRankMF:
         norm_U = np.linalg.norm(grad_U, ord="fro")
         norm_V = np.linalg.norm(grad_V, ord="fro")
         return np.sqrt(norm_U**2 + norm_V**2)
-    
+
+
+    def hvp(self, U, V, dU, dV):
+        """
+        Hessian-vector product of the objective at (U, V) in direction (dU, dV).
+
+        With E = mask * (U V^T - Y) and dE = mask * (dU V^T + U dV^T):
+
+            H_U[dU, dV] = dE V + E dV + dU Lambda
+            H_V[dU, dV] = dE^T U + E^T dU + dV Lambda
+        """
+        E = U @ V.T - self.Y
+        dE = dU @ V.T + U @ dV.T
+        if self.mask is not None:
+            E = np.where(self.mask, E, 0.0)
+            dE = np.where(self.mask, dE, 0.0)
+        H_U = dE @ V + E @ dV + dU * self.lam
+        H_V = dE.T @ U + E.T @ dU + dV * self.lam
+        return H_U, H_V
+
+
+    def hessian(self, U, V):
+        """
+        Dense Hessian of the objective with respect to vec(U), vec(V)
+        (row-major), built column by column from `hvp`. Only for small problems.
+        """
+        nU = self.n * self.R
+        dim = nU + self.p * self.R
+        H = np.zeros((dim, dim))
+        for k in range(dim):
+            e = np.zeros(dim)
+            e[k] = 1.0
+            dU = e[:nU].reshape(self.n, self.R)
+            dV = e[nU:].reshape(self.p, self.R)
+            H_U, H_V = self.hvp(U, V, dU, dV)
+            H[:, k] = np.concatenate([H_U.ravel(), H_V.ravel()])
+        return 0.5 * (H + H.T)
+
 
     def get_svd(self, matrix="Y"):
         """
@@ -184,7 +358,7 @@ class LowRankMF:
             U_svd, s, Vt_svd = cached
 
         return U_svd, s, Vt_svd
-    
+
 
     def init_V_from_svd_directions(
         self,
@@ -212,8 +386,9 @@ class LowRankMF:
             - "random":
                 scales[j] ~ Uniform(scale_range[0], scale_range[1]).
             - "soft_threshold":
-                scales[j] = sqrt(max(s[i_j] - lambda_reg, 0)),
-                where s[i_j] is the singular value at index i_j.
+                scales[j] = sqrt(max(s[i_j] - lambda_j, 0)),
+                where s[i_j] is the singular value at index i_j and lambda_j
+                the prior precision of column slot j.
         scale_range : tuple of (float, float), optional
             Range for random scaling when scaling == "random".
 
@@ -236,15 +411,33 @@ class LowRankMF:
 
         if scaling == "random":
             low, high = scale_range
-            scales = np.random.uniform(low, high, size=self.R)
+            scales = self.rng.uniform(low, high, size=self.R)
         elif scaling == "soft_threshold":
-            scales = np.sqrt(np.maximum(s_subset - self.lambda_reg, 0.0))
+            scales = np.sqrt(np.maximum(s_subset - self.lam, 0.0))
         else:
             raise ValueError('scaling must be "random" or "soft_threshold".')
 
         V0 = V_subset @ np.diag(scales)
         return V0
-    
+
+
+    def stationary_point(self, index_set, matrix="Y"):
+        """
+        The stationary point (U, V) supported on the singular directions in
+        index_set, with soft-thresholded scales: column j is
+        f_{i_j} sqrt((s_{i_j} - lambda_j)_+) for U and g_{i_j} (same scale) for V.
+        Every stationary point of the complete-data objective has this form
+        up to an orthogonal rotation (part 1 of the notes).
+        """
+        U_svd, s, Vt_svd = self.get_svd(matrix=matrix)
+        index_set = np.asarray(index_set, dtype=int)
+        if index_set.shape[0] != self.R:
+            raise ValueError("index_set must have length equal to R.")
+        gamma = np.sqrt(np.maximum(s[index_set] - self.lam, 0.0))
+        U = U_svd[:, index_set] * gamma
+        V = Vt_svd[index_set, :].T * gamma
+        return U, V
+
 
     def init_V_orthogonal_to_global_minimizer(
         self,
@@ -288,7 +481,7 @@ class LowRankMF:
         active = col_norms > active_tol
 
         # 3) Sample a random V and project it to the orthogonal complement
-        V_rand = np.random.randn(self.p, self.R)
+        V_rand = self.rng.standard_normal((self.p, self.R))
 
         if np.any(active):
             # Orthonormal basis for span(V_star_active)
@@ -303,7 +496,7 @@ class LowRankMF:
         norms = np.maximum(norms, 1e-12)
         V_perp = V_perp / norms
 
-        # 5) Scale to match your usual init magnitude
+        # 5) Scale to match the usual init magnitude
         V0 = init_scale * V_perp
 
         # 6) Optional leakage into the minimizer subspace
@@ -312,48 +505,49 @@ class LowRankMF:
 
         return V0
 
-    
+
     def _global_minimizer_matrix(self, M):
         """
-        Global minimizer of the regularized objective
-            0.5 * ||M - U V^T||_F^2 + 0.5 * lambda_reg * (||U||_F^2 + ||V||_F^2)
+        Global minimizer of the complete-data objective
+            0.5 * ||M - U V^T||_F^2 + 0.5 * (tr(U Lambda U^T) + tr(V Lambda V^T))
         for a given matrix M, via soft-thresholded SVD.
-        """
-        U_svd, s, Vt_svd = np.linalg.svd(M, full_matrices=False)
 
-        k = min(self.R, s.shape[0])
+        With a diagonal Lambda the top-R singular values are paired with the
+        precisions in ascending order (largest sigma with smallest lambda),
+        which is the optimal pairing by the rearrangement inequality.
+        """
+        k = min(self.R, min(M.shape))
+        U_svd, s, Vt_svd = top_svd(M, k)
+
         U_R = U_svd[:, :k]
         V_R = Vt_svd[:k, :].T
         s_R = s[:k]
 
-        gamma = np.sqrt(np.maximum(s_R - self.lambda_reg, 0.0))
+        # slot order: the slot with the smallest lambda gets the largest sigma
+        slots = np.argsort(self.lam, kind="stable")[:k]
+        gamma = np.sqrt(np.maximum(s_R - self.lam[slots], 0.0))
 
-        # Build factors U_star, V_star
-        U_star = U_R * gamma[np.newaxis, :]
-        V_star = V_R * gamma[np.newaxis, :]
+        U_star = np.zeros((M.shape[0], self.R))
+        V_star = np.zeros((M.shape[1], self.R))
+        U_star[:, slots] = U_R * gamma[np.newaxis, :]
+        V_star[:, slots] = V_R * gamma[np.newaxis, :]
 
-        if k < self.R:
-            n_pad = self.R - k
-            U_pad = np.zeros((self.n, n_pad))
-            V_pad = np.zeros((self.p, n_pad))
-            U_star = np.concatenate([U_star, U_pad], axis=1)
-            V_star = np.concatenate([V_star, V_pad], axis=1)
-
-        # Use the existing objective function (DRY)
         global_loss = self.loss(M, U_star, V_star)
         return U_star, V_star, global_loss
-    
+
     def global_minimizer_Y(self):
         """
-        Global minimizer of the regularized objective using the noisy matrix Y.
+        Global minimizer of the regularized objective using the matrix Y.
+        Only defined for complete data (no closed form exists with a mask).
         """
+        if self.mask is not None:
+            raise ValueError("No closed-form minimizer with missing entries.")
         return self._global_minimizer_matrix(self.Y)
 
     def global_minimizer_Ytrue(self):
         """
         Global minimizer of the regularized objective using the true matrix Y_true.
         """
+        if self.Y_true is None:
+            raise ValueError("Y_true is unknown for this problem.")
         return self._global_minimizer_matrix(self.Y_true)
-
-
-
