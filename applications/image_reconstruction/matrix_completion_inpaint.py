@@ -4,26 +4,41 @@ Matrix completion for image inpainting using Soft-Impute (iterative SVD + shrink
 The solver is pmf.solvers.soft_impute; this script handles images and masks.
 
 Usage examples:
+  # Inpaint random missing pixels (e.g., 75% missing)
+  python matrix_completion_inpaint.py --input input.jpg --output out.png --mask random \
+    --missing-frac 0.75 --lam 0.5
+
+  # Remove text written over the photo (the pixels under the text are treated as missing)
+  python matrix_completion_inpaint.py --input input.jpg --output out.png --mask text \
+    --masked-output with_text.png
+
   # Inpaint a rectangular missing region
   python matrix_completion_inpaint.py --input input.jpg --output out.png --mask rect \
-    --rect 0.25 0.25 0.5 0.5 --lam 30 --max-iter 200
+    --rect 0.25 0.25 0.5 0.5
 
-  # Inpaint random missing pixels (e.g., 60% missing)
-  python matrix_completion_inpaint.py --input input.jpg --output out.png --mask random \
-    --missing-frac 0.6 --lam 20 --max-iter 200
+Pixel values are scaled to [0, 1], so lam is on that scale: 0.1 to 1 suits most photos.
 
 Notes:
 - Soft-Impute assumes the image (or channel) is approximately low-rank.
 - Works best for smooth/structured regions; struggles on high-frequency textures.
+- A large rectangle cannot be recovered: rows and columns that are mostly
+  missing carry no information about the hidden block.
 """
 
 import argparse
 import os
+from pathlib import Path
 
+import matplotlib
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 from pmf.solvers import soft_impute
+
+# The font ships with matplotlib, so the text mask is the same on every machine.
+FONT = Path(matplotlib.get_data_path()) / "fonts" / "ttf" / "DejaVuSans.ttf"
+TEXT = ["Probabilistic matrix factorization", "fills in the missing entries", "of a low-rank matrix",
+        "from the entries it observes,", "here the pixels under this text."]
 
 
 def make_rect_mask(h: int, w: int, rect: tuple[float, float, float, float]) -> np.ndarray:
@@ -53,6 +68,19 @@ def make_random_mask(h: int, w: int, missing_frac: float, seed: int = 0) -> np.n
     return Omega
 
 
+def make_text_mask(h: int, w: int, lines: list[str] = TEXT) -> np.ndarray:
+    """
+    Pixels covered by `lines` of text, written down the image from the top
+    left, are missing. Returns Omega mask where True = observed.
+    """
+    canvas = Image.new("L", (w, h), 0)
+    draw = ImageDraw.Draw(canvas)
+    font = ImageFont.truetype(str(FONT), size=max(6, round(h / 15)))
+    for k, line in enumerate(lines):
+        draw.text((round(0.04 * w), round(h * (0.08 + 0.18 * k))), line, fill=255, font=font)
+    return np.array(canvas) == 0
+
+
 def to_float01(img: np.ndarray) -> np.ndarray:
     return img.astype(np.float64) / 255.0
 
@@ -73,12 +101,12 @@ def inpaint_image_matrix_completion(img: np.ndarray, Omega: np.ndarray, lam: flo
     img01 = to_float01(img)
     h, w = img01.shape[:2]
 
-    # Create a visible "masked" version (missing entries set to 0)
+    # Create a visible "masked" version (missing entries shown white)
     masked01 = img01.copy()
     if img01.ndim == 2:
-        masked01[~Omega] = 0.0
+        masked01[~Omega] = 1.0
     else:
-        masked01[~Omega, :] = 0.0
+        masked01[~Omega, :] = 1.0
 
     # Reconstruct each channel independently (simple baseline)
     if img01.ndim == 2:
@@ -103,14 +131,15 @@ def parse_args():
     p.add_argument("--output", required=True, help="Path to save reconstructed image (png recommended).")
     p.add_argument("--masked-output", default=None, help="Optional: save the masked image too.")
 
-    p.add_argument("--mask", choices=["rect", "random"], default="rect", help="Mask type.")
+    p.add_argument("--mask", choices=["random", "text", "rect"], default="random", help="Mask type.")
     p.add_argument("--rect", nargs=4, type=float, metavar=("X", "Y", "W", "H"),
                    default=[0.25, 0.25, 0.5, 0.5],
                    help="Rect mask in relative coords: x y w h (each in [0,1]).")
     p.add_argument("--missing-frac", type=float, default=0.6, help="Fraction missing for random mask (0..1).")
     p.add_argument("--seed", type=int, default=0, help="Random seed for random mask.")
 
-    p.add_argument("--lam", type=float, default=25.0, help="Shrinkage strength (larger => smoother/lower-rank).")
+    p.add_argument("--lam", type=float, default=0.5,
+                   help="Shrinkage strength on the [0, 1] pixel scale (larger => smoother/lower-rank).")
     p.add_argument("--max-iter", type=int, default=200, help="Max Soft-Impute iterations.")
     p.add_argument("--tol", type=float, default=1e-4, help="Relative-change tolerance.")
     p.add_argument("--rank-max", type=int, default=0,
@@ -141,6 +170,8 @@ def main():
 
     if args.mask == "rect":
         Omega = make_rect_mask(h, w, tuple(args.rect))
+    elif args.mask == "text":
+        Omega = make_text_mask(h, w)
     else:
         Omega = make_random_mask(h, w, missing_frac=args.missing_frac, seed=args.seed)
 
