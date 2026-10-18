@@ -47,6 +47,8 @@ ALS, gradient descent and soft-impute minimize the same loss L, so they end up w
 
 ## Reproduce
 
+With Python 3.11 or later:
+
 ```sh
 git clone https://github.com/lorenzocaputi/probabilistic-matrix-factorization.git
 cd probabilistic-matrix-factorization
