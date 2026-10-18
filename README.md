@@ -41,7 +41,7 @@ a least-squares fit plus a penalty that shrinks $U$ and $V$ towards zero. $L$ is
 
 With every entry observed, the minimum has a closed form. Minimizing $L$ gives the same matrix $UV^\top$ as the convex problem $\min_Z \frac{1}{2}\lVert Y - Z \rVert_F^2 + \lambda \lVert Z \rVert_*$, whose solution is the singular value decomposition of $Y$ with every singular value σ replaced by max(σ − λ, 0).
 
-Every other stationary point is a saddle, where the fit uses the wrong singular vectors of $Y$ (proved in the notes for λ = 0 and checked numerically for λ > 0). In exact arithmetic, alternating least squares started on wrong singular vectors stays on them, but a small random perturbation is usually enough to escape: in a version of the model with a different λ for each column, 196 of 200 gradient runs started next to a saddle reach the minimum ([figure](figures/saddle_escape.png)).
+Every other stationary point is a saddle, where the fit uses the wrong singular vectors of $Y$ (proved in the notes for λ = 0 and checked numerically for λ > 0). In exact arithmetic, alternating least squares (ALS) started on wrong singular vectors stays on them, but a small random perturbation is usually enough to escape: in a version of the model with a different λ for each column, 196 of 200 gradient runs started next to a saddle reach the minimum ([figure](figures/saddle_escape.png)).
 
 Missing entries remove the trap. Filling in the missing entries mixes the singular directions, and with even 1% of the entries missing, ALS, gradient descent and soft-impute reach the best solution from every starting point we tried, saddles included ([figure](figures/missing_data.png)).
 
