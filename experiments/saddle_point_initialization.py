@@ -1,5 +1,5 @@
-from LowRankMF import LowRankMF
-from ALSSolver import ALSSolver
+from pmf import LowRankMF
+from pmf.solvers import ALSSolver
 import numpy as np
 
 """ 
