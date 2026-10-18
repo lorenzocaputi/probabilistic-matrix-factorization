@@ -1,0 +1,301 @@
+seed,rank,solver,lambda,rescale,val_rmse
+0,20,closed form,0.125,False,1.06267
+0,20,closed form,0.5,False,1.06287
+0,20,closed form,2,False,1.06374
+0,20,closed form,8,False,1.06832
+0,20,closed form,200,True,1.40525
+0,20,closed form,800,True,1.11321
+0,20,closed form,3200,True,1.1346
+0,20,ALS,1,,1.14943
+0,20,ALS,2,,1.10244
+0,20,ALS,4,,1.0301
+0,20,ALS,7,,0.985851
+0,20,ALS,10,,0.968338
+0,20,ALS,14,,0.969613
+0,20,ALS,20,,0.993606
+0,20,ALS,28,,1.02976
+1,20,closed form,0.125,False,1.0436
+1,20,closed form,0.5,False,1.04387
+1,20,closed form,2,False,1.045
+1,20,closed form,8,False,1.05064
+1,20,closed form,200,True,1.36788
+1,20,closed form,800,True,1.07012
+1,20,closed form,3200,True,1.12212
+1,20,ALS,1,,1.15347
+1,20,ALS,2,,1.08428
+1,20,ALS,4,,1.01577
+1,20,ALS,7,,0.968381
+1,20,ALS,10,,0.950479
+1,20,ALS,14,,0.94664
+1,20,ALS,20,,0.969707
+1,20,ALS,28,,1.00983
+2,20,closed form,0.125,False,1.05101
+2,20,closed form,0.5,False,1.05129
+2,20,closed form,2,False,1.05248
+2,20,closed form,8,False,1.05829
+2,20,closed form,200,True,1.38738
+2,20,closed form,800,True,1.08457
+2,20,closed form,3200,True,1.12821
+2,20,ALS,1,,1.14824
+2,20,ALS,2,,1.0888
+2,20,ALS,4,,1.03138
+2,20,ALS,7,,0.97038
+2,20,ALS,10,,0.954395
+2,20,ALS,14,,0.953695
+2,20,ALS,20,,0.977389
+2,20,ALS,28,,1.01743
+3,20,closed form,0.125,False,1.03708
+3,20,closed form,0.5,False,1.03731
+3,20,closed form,2,False,1.03828
+3,20,closed form,8,False,1.04323
+3,20,closed form,200,True,1.38037
+3,20,closed form,800,True,1.07154
+3,20,closed form,3200,True,1.11151
+3,20,ALS,1,,1.14698
+3,20,ALS,2,,1.07583
+3,20,ALS,4,,1.02164
+3,20,ALS,7,,0.968829
+3,20,ALS,10,,0.945639
+3,20,ALS,14,,0.943352
+3,20,ALS,20,,0.965465
+3,20,ALS,28,,1.00297
+4,20,closed form,0.125,False,1.0532
+4,20,closed form,0.5,False,1.05343
+4,20,closed form,2,False,1.05442
+4,20,closed form,8,False,1.05935
+4,20,closed form,200,True,1.39371
+4,20,closed form,800,True,1.106
+4,20,closed form,3200,True,1.12591
+4,20,ALS,1,,1.15116
+4,20,ALS,2,,1.09436
+4,20,ALS,4,,1.02622
+4,20,ALS,7,,0.974806
+4,20,ALS,10,,0.959117
+4,20,ALS,14,,0.96202
+4,20,ALS,20,,0.985681
+4,20,ALS,28,,1.02059
+0,10,closed form,0.125,False,1.05708
+0,10,closed form,0.5,False,1.05746
+0,10,closed form,2,False,1.059
+0,10,closed form,8,False,1.06581
+0,10,closed form,200,True,1.34943
+0,10,closed form,800,True,1.11321
+0,10,closed form,3200,True,1.1346
+0,10,ALS,1,,1.05322
+0,10,ALS,2,,1.01152
+0,10,ALS,4,,0.984499
+0,10,ALS,7,,0.964986
+0,10,ALS,10,,0.961804
+0,10,ALS,14,,0.970497
+0,10,ALS,20,,0.993885
+0,10,ALS,28,,1.02979
+1,10,closed form,0.125,False,1.0403
+1,10,closed form,0.5,False,1.04072
+1,10,closed form,2,False,1.04244
+1,10,closed form,8,False,1.04992
+1,10,closed form,200,True,1.30365
+1,10,closed form,800,True,1.07012
+1,10,closed form,3200,True,1.12212
+1,10,ALS,1,,1.04748
+1,10,ALS,2,,0.999509
+1,10,ALS,4,,0.961856
+1,10,ALS,7,,0.943471
+1,10,ALS,10,,0.936878
+1,10,ALS,14,,0.942724
+1,10,ALS,20,,0.969864
+1,10,ALS,28,,1.00984
+2,10,closed form,0.125,False,1.04892
+2,10,closed form,0.5,False,1.04932
+2,10,closed form,2,False,1.05096
+2,10,closed form,8,False,1.05815
+2,10,closed form,200,True,1.31916
+2,10,closed form,800,True,1.08457
+2,10,closed form,3200,True,1.12821
+2,10,ALS,1,,1.03269
+2,10,ALS,2,,1.00006
+2,10,ALS,4,,0.970495
+2,10,ALS,7,,0.949659
+2,10,ALS,10,,0.943398
+2,10,ALS,14,,0.951289
+2,10,ALS,20,,0.977512
+2,10,ALS,28,,1.01742
+3,10,closed form,0.125,False,1.03442
+3,10,closed form,0.5,False,1.03479
+3,10,closed form,2,False,1.03627
+3,10,closed form,8,False,1.04285
+3,10,closed form,200,True,1.31563
+3,10,closed form,800,True,1.07154
+3,10,closed form,3200,True,1.11151
+3,10,ALS,1,,1.01977
+3,10,ALS,2,,0.994613
+3,10,ALS,4,,0.953468
+3,10,ALS,7,,0.936723
+3,10,ALS,10,,0.932883
+3,10,ALS,14,,0.940806
+3,10,ALS,20,,0.965678
+3,10,ALS,28,,1.00298
+4,10,closed form,0.125,False,1.05066
+4,10,closed form,0.5,False,1.05101
+4,10,closed form,2,False,1.05246
+4,10,closed form,8,False,1.05889
+4,10,closed form,200,True,1.3444
+4,10,closed form,800,True,1.106
+4,10,closed form,3200,True,1.12591
+4,10,ALS,1,,1.05245
+4,10,ALS,2,,1.01767
+4,10,ALS,4,,0.978824
+4,10,ALS,7,,0.959708
+4,10,ALS,10,,0.959171
+4,10,ALS,14,,0.965112
+4,10,ALS,20,,0.985909
+4,10,ALS,28,,1.02061
+0,5,closed form,0.125,False,1.06598
+0,5,closed form,0.5,False,1.06632
+0,5,closed form,2,False,1.06771
+0,5,closed form,8,False,1.07359
+0,5,closed form,200,True,1.31204
+0,5,closed form,800,True,1.11321
+0,5,closed form,3200,True,1.1346
+0,5,ALS,1,,0.963518
+0,5,ALS,2,,0.953979
+0,5,ALS,4,,0.947132
+0,5,ALS,7,,0.95107
+0,5,ALS,10,,0.958039
+0,5,ALS,14,,0.971478
+0,5,ALS,20,,0.995527
+0,5,ALS,28,,1.02978
+1,5,closed form,0.125,False,1.05006
+1,5,closed form,0.5,False,1.05043
+1,5,closed form,2,False,1.0519
+1,5,closed form,8,False,1.05811
+1,5,closed form,200,True,1.27086
+1,5,closed form,800,True,1.07012
+1,5,closed form,3200,True,1.12212
+1,5,ALS,1,,0.948066
+1,5,ALS,2,,0.933193
+1,5,ALS,4,,0.924289
+1,5,ALS,7,,0.924618
+1,5,ALS,10,,0.93054
+1,5,ALS,14,,0.944566
+1,5,ALS,20,,0.973332
+1,5,ALS,28,,1.00985
+2,5,closed form,0.125,False,1.05822
+2,5,closed form,0.5,False,1.05858
+2,5,closed form,2,False,1.06004
+2,5,closed form,8,False,1.06619
+2,5,closed form,200,True,1.28529
+2,5,closed form,800,True,1.08457
+2,5,closed form,3200,True,1.12821
+2,5,ALS,1,,0.948403
+2,5,ALS,2,,0.938391
+2,5,ALS,4,,0.928553
+2,5,ALS,7,,0.930172
+2,5,ALS,10,,0.938961
+2,5,ALS,14,,0.95386
+2,5,ALS,20,,0.980426
+2,5,ALS,28,,1.01743
+3,5,closed form,0.125,False,1.04166
+3,5,closed form,0.5,False,1.04201
+3,5,closed form,2,False,1.04343
+3,5,closed form,8,False,1.04942
+3,5,closed form,200,True,1.27732
+3,5,closed form,800,True,1.07154
+3,5,closed form,3200,True,1.11151
+3,5,ALS,1,,0.942544
+3,5,ALS,2,,0.921697
+3,5,ALS,4,,0.915725
+3,5,ALS,7,,0.920462
+3,5,ALS,10,,0.928426
+3,5,ALS,14,,0.942588
+3,5,ALS,20,,0.96767
+3,5,ALS,28,,1.00299
+4,5,closed form,0.125,False,1.05675
+4,5,closed form,0.5,False,1.0571
+4,5,closed form,2,False,1.0585
+4,5,closed form,8,False,1.06444
+4,5,closed form,200,True,1.29629
+4,5,closed form,800,True,1.106
+4,5,closed form,3200,True,1.12591
+4,5,ALS,1,,0.967742
+4,5,ALS,2,,0.951575
+4,5,ALS,4,,0.943442
+4,5,ALS,7,,0.945134
+4,5,ALS,10,,0.952112
+4,5,ALS,14,,0.964909
+4,5,ALS,20,,0.987622
+4,5,ALS,28,,1.02059
+0,2,closed form,0.125,False,1.08468
+0,2,closed form,0.5,False,1.0849
+0,2,closed form,2,False,1.08582
+0,2,closed form,8,False,1.08964
+0,2,closed form,200,True,1.27059
+0,2,closed form,800,True,1.12831
+0,2,closed form,3200,True,1.1346
+0,2,ALS,1,,0.961094
+0,2,ALS,2,,0.960014
+0,2,ALS,4,,0.962796
+0,2,ALS,7,,0.970329
+0,2,ALS,10,,0.979032
+0,2,ALS,14,,0.991367
+0,2,ALS,20,,1.01047
+0,2,ALS,28,,1.03613
+1,2,closed form,0.125,False,1.06943
+1,2,closed form,0.5,False,1.06967
+1,2,closed form,2,False,1.07064
+1,2,closed form,8,False,1.07465
+1,2,closed form,200,True,1.22896
+1,2,closed form,800,True,1.0868
+1,2,closed form,3200,True,1.12212
+1,2,ALS,1,,0.937899
+1,2,ALS,2,,0.936716
+1,2,ALS,4,,0.938564
+1,2,ALS,7,,0.945791
+1,2,ALS,10,,0.955096
+1,2,ALS,14,,0.968822
+1,2,ALS,20,,0.990335
+1,2,ALS,28,,1.01838
+2,2,closed form,0.125,False,1.07764
+2,2,closed form,0.5,False,1.07788
+2,2,closed form,2,False,1.07883
+2,2,closed form,8,False,1.08279
+2,2,closed form,200,True,1.23679
+2,2,closed form,800,True,1.09947
+2,2,closed form,3200,True,1.12821
+2,2,ALS,1,,0.941366
+2,2,ALS,2,,0.940626
+2,2,ALS,4,,0.943795
+2,2,ALS,7,,0.952399
+2,2,ALS,10,,0.962375
+2,2,ALS,14,,0.976345
+2,2,ALS,20,,0.997608
+2,2,ALS,28,,1.0256
+3,2,closed form,0.125,False,1.0587
+3,2,closed form,0.5,False,1.05895
+3,2,closed form,2,False,1.05994
+3,2,closed form,8,False,1.06406
+3,2,closed form,200,True,1.22851
+3,2,closed form,800,True,1.08728
+3,2,closed form,3200,True,1.11151
+3,2,ALS,1,,0.926045
+3,2,ALS,2,,0.926646
+3,2,ALS,4,,0.931139
+3,2,ALS,7,,0.939978
+3,2,ALS,10,,0.949768
+3,2,ALS,14,,0.963293
+3,2,ALS,20,,0.983478
+3,2,ALS,28,,1.01
+4,2,closed form,0.125,False,1.07485
+4,2,closed form,0.5,False,1.07509
+4,2,closed form,2,False,1.07603
+4,2,closed form,8,False,1.07996
+4,2,closed form,200,True,1.25377
+4,2,closed form,800,True,1.11431
+4,2,closed form,3200,True,1.12591
+4,2,ALS,1,,0.945
+4,2,ALS,2,,0.94536
+4,2,ALS,4,,0.949927
+4,2,ALS,7,,0.959047
+4,2,ALS,10,,0.96878
+4,2,ALS,14,,0.981901
+4,2,ALS,20,,1.00138
+4,2,ALS,28,,1.02693
