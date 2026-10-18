@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Text prediction using co-occurrence matrices + matrix completion (Soft-Impute).
+The solver is pmf.solvers.soft_impute.
 
 What it does:
 1) Reads a text corpus from --corpus (plain text).
@@ -29,7 +30,10 @@ queries.txt format: one sentence per line, containing exactly one [MASK]
 import argparse
 import re
 from collections import Counter
+
 import numpy as np
+
+from pmf.solvers import soft_impute
 
 
 MASK_TOKEN = "[mask]"
@@ -72,53 +76,6 @@ def build_cooc_matrix(tokens, w2i, window: int):
                 continue
             C[center_id, ctx_id] += 1.0
     return C
-
-
-def soft_threshold_singular_values(A: np.ndarray, lam: float, rank_max: int | None):
-    U, s, Vt = np.linalg.svd(A, full_matrices=False)
-    if rank_max is not None:
-        U = U[:, :rank_max]
-        s = s[:rank_max]
-        Vt = Vt[:rank_max, :]
-    s2 = np.maximum(s - lam, 0.0)
-    if np.all(s2 == 0):
-        return np.zeros_like(A)
-    return (U * s2) @ Vt
-
-
-def soft_impute(M_obs: np.ndarray, Omega: np.ndarray, lam: float,
-                max_iter: int, tol: float, rank_max: int | None, verbose: bool):
-    """
-    Soft-Impute matrix completion:
-      iterate X <- S_lambda( P_Omega(M_obs) + P_notOmega(X) )
-    """
-    X = np.zeros_like(M_obs, dtype=np.float64)
-    # init missing entries with mean of observed
-    if np.any(Omega):
-        mean_val = float(np.mean(M_obs[Omega]))
-        X[~Omega] = mean_val
-        X[Omega] = M_obs[Omega]
-
-    prev = X.copy()
-    eps = 1e-12
-
-    for it in range(1, max_iter + 1):
-        Z = X.copy()
-        Z[Omega] = M_obs[Omega]
-
-        X = soft_threshold_singular_values(Z, lam=lam, rank_max=rank_max)
-
-        # keep observed exactly
-        X[Omega] = M_obs[Omega]
-
-        rel = np.linalg.norm(X - prev) / (np.linalg.norm(prev) + eps)
-        if verbose and (it == 1 or it % 10 == 0 or rel < tol):
-            print(f"iter={it:4d} rel_change={rel:.3e}")
-        if rel < tol:
-            break
-        prev = X.copy()
-
-    return X
 
 
 def make_observation_mask(shape, missing_frac: float, seed: int):
