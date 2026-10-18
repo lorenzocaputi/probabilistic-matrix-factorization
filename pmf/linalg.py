@@ -1,7 +1,7 @@
 """Small linear-algebra helpers shared by the problem and the solvers."""
 
 import numpy as np
-from scipy.sparse.linalg import svds
+from scipy.sparse.linalg import ArpackError, svds
 
 
 def top_svd(A, k):
@@ -10,7 +10,7 @@ def top_svd(A, k):
 
     Uses a dense SVD unless k is small compared to the matrix, in which case
     ARPACK (scipy.sparse.linalg.svds) is used with a fixed starting vector so
-    that results are deterministic.
+    that results are deterministic (falling back to the dense SVD if ARPACK fails).
 
     Returns
     -------
@@ -24,8 +24,12 @@ def top_svd(A, k):
     if q < 200 or k > q // 5:
         U, s, Vt = np.linalg.svd(A, full_matrices=False)
         return U[:, :k], s[:k], Vt[:k, :]
-    v0 = np.ones(q) / np.sqrt(q)
-    U, s, Vt = svds(A, k=k, v0=v0, tol=0.0)
+    v0 = np.random.default_rng(0).standard_normal(q)  # fixed start: deterministic
+    try:
+        U, s, Vt = svds(A, k=k, v0=v0, tol=0.0)
+    except ArpackError:
+        U, s, Vt = np.linalg.svd(A, full_matrices=False)
+        return U[:, :k], s[:k], Vt[:k, :]
     order = np.argsort(-s)
     return U[:, order], s[order], Vt[order, :]
 
