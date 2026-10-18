@@ -1,77 +1,71 @@
-# probabilistic-matrix-factorization
+# Probabilistic matrix factorization
 
-MAP estimation and matrix completion with probabilistic matrix factorization: notes on the loss landscape and ALS dynamics, and seven solvers compared on the same problems.
+Probabilistic matrix factorization fills in the missing entries of a matrix, such as a table of users' movie ratings or a photo with pixels missing, by modelling it as the product of two thin matrices. This repository has notes on the theory, written with Omiros Papaspiliopoulos, and a Python package that fits the model with seven different algorithms and compares them on simulated data and on 100,000 real movie ratings.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/hero-dark.png">
-  <img alt="Three panels. (a) A landscape photo with half of its pixels hidden, and the same photo completed by soft-impute. (b) Relative error against iteration for seven solvers on a 300 by 200 matrix with half of its entries missing: ALS, gradient descent and soft-impute settle at 0.085, VB and Gibbs at 0.049, SVT dips to 0.050 and then rises as it fits the noise, the closed-form spectral estimate stays at 0.28. (c) Profiled loss of 200 projected-gradient runs started near a bad-pairing saddle at 35.43: most leave it by step 500, pass a second plateau and reach the optimum 33.25." src="figures/hero.png">
+  <img alt="Two panels. (a) Error against the true matrix as each algorithm runs on a simulated 300 by 200 matrix with half of its entries hidden: ALS, gradient descent and soft-impute settle at 0.085, VB and Gibbs at 0.049, SVT reaches 0.05 and then rises as it fits the noise, the closed form stays at 0.28. (b) Test error on held-out MovieLens ratings, in stars: Gibbs 0.904, VB 0.919, ALS 0.938, gradient descent 0.940, soft-impute 0.942, SVT 0.960, closed form 1.045, against 1.122 for predicting the average rating." src="figures/hero.png">
 </picture>
 
-Started next to a bad-pairing saddle of the diagonal-prior MAP loss (loss 35.43, optimum 33.25), 182 of 200 perturbed projected-gradient runs have left it by step 500, and 196 of 200 are within a relative 1e-6 of the global minimum by step 20,000.
+(a) A simulated 300 × 200 matrix of rank 5 plus noise, with half of its entries hidden: how far each algorithm's estimate is from the true matrix as it runs. (b) The error of each algorithm when it predicts MovieLens ratings it has not seen.
 
-On MovieLens-100K (random 80/20 splits, 5 seeds, mean ± sd of test RMSE in stars; predicting the training mean gives 1.122):
+## The problem
 
-| solver | rank (chosen on validation) | test RMSE |
+We observe some entries of an n × p matrix Y and want to predict the rest. In MovieLens the rows are 943 users, the columns are 1,682 movies, and 6% of the entries are observed: the 100,000 ratings, from 1 to 5 stars.
+
+The model gives every row i a vector $u_i$ and every column j a vector $v_j$, both of a small length r, and says that each entry is their dot product plus noise:
+
+$$Y_{ij} = u_i^\top v_j + \varepsilon_{ij}, \qquad \varepsilon_{ij} \sim N(0, 1), \qquad u_i,\ v_j \sim N(0, \lambda^{-1} I).$$
+
+So Y is close to a matrix $UV^\top$ of rank r, and the prior keeps U and V small. For movies, $v_j$ describes a movie by r numbers, $u_i$ describes how much a user likes each of them, and the predicted rating of an unseen movie is $u_i^\top v_j$. The most probable U and V given the observed entries (the MAP estimate) minimize
+
+$$L(U, V) = \frac{1}{2} \sum_{(i,j) \text{ observed}} \left(Y_{ij} - u_i^\top v_j\right)^2 + \frac{\lambda}{2} \left(\lVert U \rVert_F^2 + \lVert V \rVert_F^2\right),$$
+
+a least-squares fit plus a penalty that shrinks U and V towards zero. L is not convex, so it is not obvious that an algorithm will find its minimum. The notes ([notes/pmf.pdf](notes/pmf.pdf)) show what happens:
+
+- With every entry observed, the answer has a closed form. Minimizing L gives the same matrix $UV^\top$ as the convex problem $\min_Z \frac{1}{2}\lVert Y - Z \rVert_F^2 + \lambda \lVert Z \rVert_*$, whose solution is the singular value decomposition of Y with every singular value σ replaced by max(σ − λ, 0).
+- Every other stationary point is a saddle, where the fit uses the wrong singular vectors of Y (proved in the notes for λ = 0, checked numerically for λ > 0). In exact arithmetic, alternating least squares started on wrong singular vectors stays on them, but a small random perturbation is usually enough to escape. In a version of the model with a different λ for each column, 196 of 200 gradient runs started next to a saddle reach the minimum ([figure](figures/saddle_escape.png)).
+- Missing entries remove the trap. Filling in the missing entries mixes the singular directions, and with even 1% of the entries missing, ALS, gradient descent and soft-impute reach the best solution from every starting point we tried, saddles included ([figure](figures/missing_data.png)).
+
+## Algorithms and results
+
+| algorithm | how it fits the model | MovieLens error |
 |---|---|---|
-| Gibbs | 20 | 0.904 ± 0.003 |
-| VB | 20 | 0.919 ± 0.002 |
-| ALS | 5 | 0.938 ± 0.003 |
-| gradient descent | 5 | 0.940 ± 0.004 |
-| soft-impute | 5 | 0.942 ± 0.006 |
-| SVT | 8 to 16 (early stopping) | 0.960 ± 0.004 |
-| closed form, zero-filled | 10 | 1.045 ± 0.004 |
+| Gibbs sampling (Salakhutdinov & Mnih 2008) | draws U and V from their posterior distribution and averages the predictions | 0.904 |
+| Variational Bayes, VB (Lim & Teh 2007) | approximates the posterior by a simpler distribution and predicts with its mean | 0.919 |
+| Alternating least squares (ALS) | solves for U with V fixed, then for V with U fixed; each half-step is a ridge regression | 0.938 |
+| Gradient descent | takes gradient steps on U and V together | 0.940 |
+| Soft-impute (Mazumder, Hastie & Tibshirani 2010) | fills the missing entries with the current estimate, then applies the closed form | 0.942 |
+| Singular value thresholding, SVT (Cai, Candès & Shen 2010) | a related convex method whose rank grows as it runs; stopped when the validation error is lowest | 0.960 |
+| Closed form | the closed form applied once, with the missing entries set to zero | 1.045 |
 
-The rank and λ are chosen on a validation split of the training ratings. ALS, gradient descent and soft-impute minimize the same objective with the same λ; within their iteration budgets the last two end between 0.2% below and 0.82% above ALS's objective value. The Bayesian posterior means do better than all three at every rank ([RMSE against rank](figures/movielens_rmse.png)).
+The error is the root mean squared error on a random 20% of the ratings held out for testing, in stars: an error of 0.9 means a typical prediction is about 0.9 stars off. Predicting the average rating for every movie gives 1.122. Each number is the mean over 5 random splits (standard deviation 0.002 to 0.006), and the rank r and λ were chosen for each algorithm on part of the training ratings.
 
-## Run it
+ALS, gradient descent and soft-impute minimize the same loss L, so they end up with almost the same predictions. Gibbs sampling and variational Bayes do not commit to one U and V: they average over all the U and V that fit the data reasonably well, and that predicts unseen ratings better at every rank ([error against rank](figures/movielens_rmse.png)). The simulated matrix in panel (a) shows the same order: the three MAP algorithms stop 8.5% away from the true matrix, the two Bayesian ones 4.9% away, and SVT gets to 5% before it starts fitting the noise.
+
+## Reproduce
 
 ```sh
 git clone https://github.com/lorenzocaputi/probabilistic-matrix-factorization.git
 cd probabilistic-matrix-factorization
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-make check      # tests and a small run of every experiment; `make reproduce` reruns everything
+make reproduce
 ```
 
-`make reproduce` runs all experiments with 3 worker processes (about 35 minutes on a laptop; MovieLens is downloaded from files.grouplens.org into `data/`, which is not committed) and redraws the figures. `make figures` redraws them from the committed `results/`. The notebooks in `experiments/` need `pip install jupyter`.
+`make reproduce` reruns every experiment and redraws every figure in about 40 minutes on a laptop; it downloads MovieLens from grouplens.org. `make check` runs the tests and a small version of each experiment in about a minute, and `make figures` redraws the figures from the saved results in `results/`.
 
-## What the notes show
+## Application: filling in a photo
 
-[notes/pmf.pdf](notes/pmf.pdf), 16 pages, Lorenzo Caputi and Omiros Papaspiliopoulos.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures/inpainting-dark.png">
+  <img alt="A photo of a rocket on its launch pad at dusk. In the middle column, three quarters of its pixels are removed at random, and below it the photo completed by soft-impute: the rocket, the towers and the lights are back, slightly grainy. In the right column, five lines of white text are written over the photo, and below it the completed photo with the text gone except for faint traces." src="figures/inpainting.png">
+</picture>
 
-- The MAP estimate with Gaussian priors of precision λ on both factors solves the convex problem ½‖Y − Z‖²_F + λ‖Z‖_*, so it is the soft-thresholded SVD Z* = F diag((σ_i − λ)_+) Gᵀ, with factors F diag(√(σ_i − λ)_+) and G diag(√(σ_i − λ)_+) up to rotation.
-- Started on scaled singular vectors, ALS never changes direction: each scale follows γ ← σγ / (λ + γ²), converges monotonically to √(σ − λ) (or to 0 when σ ≤ λ), at the linear rate |1 − 2λ/σ| per half-step. With a diagonal prior each coordinate does this on its own.
-- In the maximum-likelihood case the stationary points are the R-dimensional invariant subspaces of YᵀY, points on a Grassmann manifold; every one other than the top-R subspace has a descent direction, so it is a saddle.
-- In experiments with a 20% mask, soft-impute reached the same solution from all four starting points, including the ones on a saddle subspace, while complete-data ALS stayed in the subspace it started in.
+A colour photo is three matrices of pixel values, one per colour, and a photo made of long straight lines like this launch pad is close to a low-rank matrix. Filling in hidden pixels is then the same problem as predicting unseen ratings. In the middle column, three quarters of the pixels are removed at random and soft-impute rebuilds the photo from the quarter that is left. In the right column, the pixels under the text are treated as missing, which removes the text. The code is in [`applications/image_reconstruction`](applications/image_reconstruction), and this runs it on your own photo:
 
-## What I measured
-
-- **ALS rate.** On complete data the ALS error contracts per iteration by max((σ_{R+1}/σ_R)², maxᵢ (1 − 2λ/σᵢ)²): the first term because span(V) follows orthogonal iteration on YᵀY, the second is the notes' scalar rate squared. Over 35 (λ, gap) settings the measured rate is within 1% of this in 29 and within 3% in 31; in the other four the measured rate is lower, by up to 29% ([figure](figures/convergence_rates.png)).
-- **Landscape.** For a rank-4 fit with seven singular values above λ, the 99 stationary points all have loss ½‖Y‖²_F − ½ Σ_{i∈I} (σᵢ − λ)². Only the top-4 one has no negative Hessian eigenvalue, and in all 99 the number of negative eigenvalues equals a simple count: one for each pair of a used singular direction and a larger unused one, plus one for each zero column and unused direction above λ ([figure](figures/landscape.png)).
-- **Saddle escape.** The 182 of 200 is a count at step 500. The runs leave the bad pairing after a few hundred steps, stall on a second plateau and reach the optimum after a median of 5,336 steps (4 of 200 are not there by step 20,000). Over prior scales 0.25 to 4 and ranks 2 to 8 (100 runs each), every run with R ≤ 3 reaches the optimum although none has left the saddle by step 500. With R = 8, 72 to 88 of 100 leave by step 500, but after 20,000 steps the median run is still 0.009 to 0.023 above the optimum, whose flattest direction has curvature 0.011 to 0.036 ([figure](figures/saddle_escape.png)).
-- **Missing data.** ALS started exactly at a saddle of the complete-data loss still leaves it, after a median of 159 iterations, because the saddle amplifies rounding errors; gradient descent, whose gradient there is zero up to rounding, never moves. With 1% of the entries missing ALS reaches the best subspace in a median of 39 iterations, and with 5 to 40% missing in 26 to 30. Apart from that gradient-descent run, every run from every start ends at the best loss found ([figure](figures/missing_data.png)).
-- **Convergence (hero, panel b).** With half of the entries missing, ALS, gradient descent and soft-impute reach the same MAP point (relative error 0.085); VB and the Gibbs posterior mean reach 0.049; SVT passes 0.050 at iteration 221 and then fits the noise. To get within 1e-6 of their own limit with 30% missing (median over the λ and gap grid), soft-impute needs 18 iterations, VB 34, ALS 63 and gradient descent 165; SVT does not get there in 3,000.
-
-Sizes were kept small so that `make reproduce` runs on a laptop: synthetic matrices are at most 300 × 200, the saddle grid uses 100 runs per cell, and MovieLens uses 5 seeds.
-
-## Layout
-
-```
-pmf/            LowRankMF problem, seven solvers (pmf/solvers/), landscape tools
-experiments/    scripts that write results/*.csv, and the original notebooks
-plotting/       one script per figure, reading results/
-applications/   image inpainting and word co-occurrence completion with soft-impute
-notes/          pmf.tex and pmf.pdf
+```sh
+python applications/image_reconstruction/matrix_completion_inpaint.py --input photo.jpg --output completed.png --mask random --missing-frac 0.75
 ```
 
-## References
-
-- N. Srebro, J. Rennie, T. Jaakkola. Maximum-margin matrix factorization. NeurIPS 2004 (proceedings 2005).
-- R. Mazumder, T. Hastie, R. Tibshirani. Spectral regularization algorithms for learning large incomplete matrices. JMLR 11, 2010. (soft-impute)
-- J.-F. Cai, E. J. Candès, Z. Shen. A singular value thresholding algorithm for matrix completion. SIAM J. Optim. 20(4), 2010. (SVT)
-- S. Nakajima, M. Sugiyama, S. D. Babacan. Global solution of fully-observed variational Bayesian matrix factorization is column-wise independent. NeurIPS 2011.
-- Y. J. Lim, Y. W. Teh. Variational Bayesian approach to movie rating prediction. KDD Cup and Workshop 2007. (VB)
-- R. Salakhutdinov, A. Mnih. Bayesian probabilistic matrix factorization using Markov chain Monte Carlo. ICML 2008. (Gibbs)
-- F. M. Harper, J. A. Konstan. The MovieLens datasets: history and context. ACM TiiS 5(4), 2015.
-
-Cite this repository with [CITATION.cff](CITATION.cff).
+Photo: the launch of DSCOVR on a Falcon 9, February 2015, by SpaceX, in the public domain.
