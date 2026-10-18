@@ -8,9 +8,10 @@ lambda = 2. Four starting points, as in the notes:
     B  the top three directions with random scales,
     C  the stationary point on directions 4, 5, 6 (a saddle),
     D  directions 4, 5, 6 with random scales.
-From each, ALS, soft-impute and gradient descent run for a fixed number of
-iterations (no early stopping) on the complete matrix and with a fraction of
-the entries hidden at random (5 masks per fraction).
+From each, ALS, soft-impute and gradient descent run for 2,000 iterations
+with no stopping rule on the loss (gradient descent stops when its gradient norm
+falls below 1e-10, soft-impute after one step on complete data) on the complete
+matrix and with a fraction of the entries hidden at random (5 masks per fraction).
 
 For every run we record the final masked objective, its gap to the best value
 found on that problem, the distance between the final right factor and the
