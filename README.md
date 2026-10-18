@@ -1,6 +1,6 @@
 # Probabilistic matrix factorization
 
-Probabilistic matrix factorization fills in the missing entries of a matrix, such as a table of users' movie ratings or a photo with pixels missing, by modelling it as the product of two thin matrices. This repository has notes on the theory, written with Omiros Papaspiliopoulos, and a Python package that fits the model with seven different algorithms and compares them on simulated data and on 100,000 real movie ratings.
+Probabilistic matrix factorization fills in the missing entries of a matrix, such as a table of users' movie ratings or a photo with pixels missing, by modelling it as the product of two thin matrices. The project is the result of my work as a research assistant at Bocconi University, under the supervision of Prof. Omiros Papaspiliopoulos: notes on the theory, written with him, and a Python package that fits the model with seven different algorithms and compares them on simulated data and on 100,000 real movie ratings.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/hero-dark.png">
