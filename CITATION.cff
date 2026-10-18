@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these notes or this code, please cite them as below."
+type: software
+title: "Probabilistic matrix factorization: MAP estimation, ALS dynamics and seven solvers"
+authors:
+  - family-names: Caputi
+    given-names: Lorenzo
+  - family-names: Papaspiliopoulos
+    given-names: Omiros
+repository-code: "https://github.com/lorenzocaputi/probabilistic-matrix-factorization"
+license: MIT
+keywords:
+  - matrix factorization
+  - matrix completion
+  - MAP estimation
+  - variational inference
+  - low rank
