@@ -1,0 +1,14 @@
+# Dark-mode overrides, applied on top of style.mplstyle.
+
+figure.facecolor: 1a1a19
+savefig.facecolor: 1a1a19
+axes.facecolor: 1a1a19
+text.color: f0efec
+axes.labelcolor: c3c2b7
+axes.edgecolor: 383835
+xtick.color: 898781
+ytick.color: 898781
+xtick.labelcolor: c3c2b7
+ytick.labelcolor: c3c2b7
+grid.color: 2c2c2a
+axes.prop_cycle: cycler('color', ['3987e5', 'd95926', '199e70', 'c98500', 'd55181', '008300', '9085e9'])
