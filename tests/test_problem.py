@@ -92,3 +92,16 @@ def test_same_seed_same_problem():
     assert np.array_equal(a.Y, b.Y)
     assert np.array_equal(a.mask, b.mask)
     assert np.array_equal(a.sample_initial_V(), b.sample_initial_V())
+
+
+def test_subspace_distance():
+    from pmf.linalg import subspace_distance
+    rng = np.random.default_rng(0)
+    A = rng.standard_normal((20, 3))
+    assert subspace_distance(A, A @ rng.standard_normal((3, 3))) < 1e-14
+    Q, _ = np.linalg.qr(rng.standard_normal((20, 6)))
+    assert np.isclose(subspace_distance(Q[:, :3], Q[:, 3:]), 1.0)
+    theta = 1e-9
+    B = Q[:, :3].copy()
+    B[:, 0] = np.cos(theta) * Q[:, 0] + np.sin(theta) * Q[:, 5]
+    assert np.isclose(subspace_distance(Q[:, :3], B), np.sin(theta), rtol=1e-6)

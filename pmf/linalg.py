@@ -83,5 +83,7 @@ def subspace_distance(A, B):
         return 1.0
     if QA.shape[1] > QB.shape[1]:
         QA, QB = QB, QA
-    cosines = np.linalg.svd(QA.T @ QB, compute_uv=False)
-    return float(np.sqrt(max(0.0, 1.0 - np.min(cosines) ** 2)))
+    # ||(I - P_B) Q_A||_2 is the sine directly, accurate down to rounding level
+    # (1 - cos^2 would lose everything below about 1e-8)
+    residual = QA - QB @ (QB.T @ QA)
+    return float(min(1.0, np.linalg.norm(residual, ord=2)))
